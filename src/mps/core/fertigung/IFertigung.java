@@ -1,5 +1,6 @@
 package mps.core.fertigung;
 /** Komponente fuer welche diese Schnittstelle entworfen wurde: AuftragsUndAngebotsVerwaltung, Fassade
+ * Dieses Interface wird von der Klasse FertigungsService implementiert/realisiert.
  * @author Christian, Nick, Krystian
  *
  */
