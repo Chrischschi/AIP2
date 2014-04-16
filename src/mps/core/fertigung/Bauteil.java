@@ -79,7 +79,7 @@ public class Bauteil {
 	}
 
 	public void setFertigungsauftragListe(
-			HashSet<Fertigungsauftrag> fertigungsauftragListe) {
+			Set<Fertigungsauftrag> fertigungsauftragListe) {
 		this.fertigungsauftragListe = fertigungsauftragListe;
 	}
 
@@ -88,7 +88,7 @@ public class Bauteil {
 	}
 
 	public void setStuecklistenPosition(
-			HashSet<StuecklistenPosition> stuecklistenPosition) {
+			Set<StuecklistenPosition> stuecklistenPosition) {
 		this.stuecklistenPosition = stuecklistenPosition;
 	}
 

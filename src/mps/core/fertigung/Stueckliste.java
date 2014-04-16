@@ -63,7 +63,7 @@ public class Stueckliste {
 	}
 
 	public void setStuecklistenPosition(
-			HashSet<StuecklistenPosition> stuecklistenPosition) {
+			Set<StuecklistenPosition> stuecklistenPosition) {
 		this.stuecklistenPosition = stuecklistenPosition;
 	}
 }
