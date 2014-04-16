@@ -1,14 +1,21 @@
 package mps.core.fertigung;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class StuecklistenPosition {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int nr;
+	@ManyToOne
 	private Stueckliste stueckliste;
+	@ManyToOne
 	private Bauteil bauteil;
 	private int menge;
-	
-	public StuecklistenPosition(Stueckliste stueckliste, Bauteil bauteil) {
-		this.bauteil = bauteil;
-		this.stueckliste = stueckliste;
-	}
 
 	public Stueckliste getStueckliste() {
 		return stueckliste;

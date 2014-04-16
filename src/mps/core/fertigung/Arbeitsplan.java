@@ -1,23 +1,37 @@
 package mps.core.fertigung;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Arbeitsplan {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
+	@OneToOne
 	private Bauteil bauteil;
-	private ArrayList<Vorgang> vorgangListe = new ArrayList<Vorgang>();
+	@OneToMany
+	@JoinTable(
+		    name="ARBEITSPLAN_VORGANG",
+		    joinColumns=
+		        @JoinColumn(name="ARBEITSPLAN_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="VORGANG_ID")
+		    )
+	private Set<Vorgang> vorgangListe = new HashSet<Vorgang>();
 	
-	public Arbeitsplan(Bauteil bauteil, Vorgang vorgang) {
-	this.bauteil = bauteil;
-	vorgangListe.add(vorgang);
-	}
+	
 
 	public Bauteil getBauteil() {
 		return bauteil;
@@ -27,11 +41,11 @@ public class Arbeitsplan {
 		this.bauteil = bauteil;
 	}
 
-	public ArrayList<Vorgang> getVorgangListe() {
+	public Set<Vorgang> getVorgangListe() {
 		return vorgangListe;
 	}
 
-	public void setVorgangListe(ArrayList<Vorgang> vorgangListe) {
+	public void setVorgangListe(HashSet<Vorgang> vorgangListe) {
 		this.vorgangListe = vorgangListe;
 	}
 

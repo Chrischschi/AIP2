@@ -1,18 +1,37 @@
 package mps.core.fertigung;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Stueckliste {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int nr;
 	private String gueltigAb;
 	private String gueltigBis;
+	@OneToOne
 	private Bauteil bauteil;
-	private ArrayList<StuecklistenPosition> stuecklistenPosition = new ArrayList<StuecklistenPosition>();
-	
-	public Stueckliste(Bauteil bauteil, StuecklistenPosition stuecklistenPosition) {
-		this.bauteil = bauteil;
-		this.stuecklistenPosition.add(stuecklistenPosition);
-	}
+	@OneToMany
+	@JoinTable(
+		    name="STUECKLISTE_STUECKLISTENPOSITION",
+		    joinColumns=
+		        @JoinColumn(name="STUECKLISTE_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="STUECKLISTENPOSITION_ID")
+		    )
+	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
+
 
 	public String getGueltigAb() {
 		return gueltigAb;
@@ -38,12 +57,12 @@ public class Stueckliste {
 		this.bauteil = bauteil;
 	}
 
-	public ArrayList<StuecklistenPosition> getStuecklistenPosition() {
+	public Set<StuecklistenPosition> getStuecklistenPosition() {
 		return stuecklistenPosition;
 	}
 
 	public void setStuecklistenPosition(
-			ArrayList<StuecklistenPosition> stuecklistenPosition) {
+			HashSet<StuecklistenPosition> stuecklistenPosition) {
 		this.stuecklistenPosition = stuecklistenPosition;
 	}
 }

@@ -1,6 +1,8 @@
 package mps.core.fertigung;
 
 
+import java.util.HashSet;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -25,8 +27,13 @@ public class FertigungRepository {
 
 	public static void main(String[] args) {
 //----------------------Test get und save------------------------
-		Bauteil b = new Bauteil();
-		b.setName("Auto");
+
+	Arbeitsplan a = new Arbeitsplan();
+	Vorgang v = new Vorgang();
+	HashSet<Vorgang> hs = new HashSet<Vorgang>();
+	hs.add(v);
+	a.setVorgangListe(hs);
+	v.setArbeitsplan(a);
 	
 		
 		SessionFactory sessionFactory = createSessionFactory();
@@ -34,9 +41,10 @@ public class FertigungRepository {
 		session.beginTransaction();
 		
 		
-		Bauteil c = (Bauteil) session.get(Bauteil.class, 1);
-		c.setName("heueu");
-		session.save(c);
+	//	Bauteil c = (Bauteil) session.get(Bauteil.class, 1);
+	//	c.setName("heueu");
+		session.save(a);
+		session.save(v);
 		
 		
 		session.getTransaction().commit();

@@ -1,21 +1,20 @@
 package mps.core.fertigung;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Fertigungsauftrag {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int nr;
 	private int auftragsNr;
+	@ManyToOne
 	private Bauteil bauteil;
-	
-	public Fertigungsauftrag(int auftragsNr, Bauteil bauteil) {
-		this.auftragsNr = auftragsNr;
-		this.bauteil = bauteil;
-	}
 
 	public int getAuftragsNr() {
 		return auftragsNr;
