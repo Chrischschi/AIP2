@@ -3,6 +3,7 @@ package mps.core.fertigung;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +26,7 @@ public class Bauteil {
 	private Arbeitsplan arbeitsplan;
 	@OneToOne
 	private Stueckliste stueckliste;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 		    name="BAUTEIL_FERTIGUNGSAUFTRAG",
 		    joinColumns=
@@ -34,7 +35,7 @@ public class Bauteil {
 		        @JoinColumn(name="FERTIGUNGSAUFTRAG_ID")
 		    )
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 		    name="BAUTEIL_STUECKLISTENPOSITION",
 		    joinColumns=

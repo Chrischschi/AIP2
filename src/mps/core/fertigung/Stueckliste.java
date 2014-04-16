@@ -3,6 +3,7 @@ package mps.core.fertigung;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class Stueckliste {
 	private String gueltigBis;
 	@OneToOne
 	private Bauteil bauteil;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 		    name="STUECKLISTE_STUECKLISTENPOSITION",
 		    joinColumns=

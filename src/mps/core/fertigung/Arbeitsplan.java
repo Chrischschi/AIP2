@@ -1,8 +1,11 @@
 package mps.core.fertigung;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +24,7 @@ public class Arbeitsplan {
 	private int nr;
 	@OneToOne
 	private Bauteil bauteil;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	@JoinTable(
 		    name="ARBEITSPLAN_VORGANG",
 		    joinColumns=
@@ -29,7 +32,7 @@ public class Arbeitsplan {
 		    inverseJoinColumns=
 		        @JoinColumn(name="VORGANG_ID")
 		    )
-	private Set<Vorgang> vorgangListe = new HashSet<Vorgang>();
+	private List<Vorgang> vorgangListe = new ArrayList<Vorgang>();
 	
 	
 
@@ -41,11 +44,11 @@ public class Arbeitsplan {
 		this.bauteil = bauteil;
 	}
 
-	public Set<Vorgang> getVorgangListe() {
+	public List<Vorgang> getVorgangListe() {
 		return vorgangListe;
 	}
 
-	public void setVorgangListe(HashSet<Vorgang> vorgangListe) {
+	public void setVorgangListe(ArrayList<Vorgang> vorgangListe) {
 		this.vorgangListe = vorgangListe;
 	}
 
