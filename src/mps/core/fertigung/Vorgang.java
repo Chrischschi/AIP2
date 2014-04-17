@@ -1,6 +1,8 @@
 package mps.core.fertigung;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +18,7 @@ public class Vorgang {
 	private int ruestzeit;
 	private int maschinenzeit;
 	private int personenzeit;
+	@Enumerated(EnumType.STRING)
 	private VorgangArtTyp vorgangArtTyp;
 
 	public Arbeitsplan getArbeitsplan() {
