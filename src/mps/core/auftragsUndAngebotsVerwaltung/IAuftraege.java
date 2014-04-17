@@ -13,5 +13,13 @@ public interface IAuftraege {
 	 * @param auftragNr ID des Auftrags 
 	 * @returns ID des bauteils
 	 */
-	long getBauteilIdOfAutrag(long auftragNr); 
+	Long getBauteilIdOfAutrag(Long auftragNr); 
+	
+	/** gibt eine referenz auf einen auftrag zurück,
+	 * diese referenz hat den typ E(xtern)Auftrag, damit
+	 * nicht implementierungsdetails aus der komponente raussickern 
+	 */
+	static EAuftrag getAuftrag(Long auftragNr) {
+		return AuftragRepository.readAuftrag(auftragNr);
+	}
 }
