@@ -65,8 +65,8 @@ public class FertigungRepository {
 	
 	public static void assoziationStueckListeStuecklistenPosition(int s_id, int sp_id){
 		open();
-		Stueckliste s = (Stueckliste) session.load(Stueckliste.class, s_id);
-		StuecklistenPosition sp = (StuecklistenPosition) session.load(StuecklistenPosition.class, sp_id);
+		Stueckliste s = (Stueckliste) session.get(Stueckliste.class, s_id);
+		StuecklistenPosition sp = (StuecklistenPosition) session.get(StuecklistenPosition.class, sp_id);
 		Set<StuecklistenPosition> temp = s.getStuecklistenPosition();
 		temp.add(sp);
 		s.setStuecklistenPosition(temp);
@@ -79,8 +79,8 @@ public class FertigungRepository {
 	
 	public static void assoziationBauteilStuecklistenPosition(int b_id, int sp_id){
 		open();
-		Bauteil b = (Bauteil) session.load(Bauteil.class, b_id);
-		StuecklistenPosition sp = (StuecklistenPosition) session.load(StuecklistenPosition.class, sp_id);
+		Bauteil b = (Bauteil) session.get(Bauteil.class, b_id);
+		StuecklistenPosition sp = (StuecklistenPosition) session.get(StuecklistenPosition.class, sp_id);
 		Set<StuecklistenPosition> temp = b.getStuecklistenPosition();
 		temp.add(sp);
 		b.setStuecklistenPosition( temp);
@@ -92,14 +92,25 @@ public class FertigungRepository {
 	
 	public static void assoziationBauteilStueckliste(int b_id, int s_id){
 		open();
-		Bauteil b = (Bauteil) session.load(Bauteil.class, b_id);
-		Stueckliste s = (Stueckliste) session.load(Stueckliste.class, s_id);
+		Bauteil b = (Bauteil) session.get(Bauteil.class, b_id);
+		Stueckliste s = (Stueckliste) session.get(Stueckliste.class, s_id);
 		b.setStueckliste(s);
 		s.setBauteil(b);
 		session.merge(b);
 		session.merge(s);
 		close();
 	}
+	
+//	public static <T,U> void assoziationSetzen(T t, U u,int id1, int id2){
+//		open();
+//		T b = (T) session.get(t.getClass(), id1);
+//		U s = (U) session.get(u.getClass(), id2);
+//		b.setStueckliste(s);
+//		s.setBauteil(b);
+//		session.merge(b);
+//		session.merge(s);
+//		close();
+//	}
 	
 	
 	public static void main(String[] args) {
@@ -135,8 +146,8 @@ public class FertigungRepository {
 //		
 //		session.save(a);
 //		session.save(v);
-//		Arbeitsplan c = (Arbeitsplan) session.load(Arbeitsplan.class, 1);
-//		Vorgang d = (Vorgang) session.load(Vorgang.class, 1);
+//		Arbeitsplan c = (Arbeitsplan) session.get(Arbeitsplan.class, 1);
+//		Vorgang d = (Vorgang) session.get(Vorgang.class, 1);
 //		Vorgang test = (Vorgang) c.getVorgangListe().toArray()[0];
 //		System.out.println(test.getMaschinenzeit());
 //		System.out.println(d.getArbeitsplan());
