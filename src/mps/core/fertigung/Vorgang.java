@@ -60,5 +60,21 @@ public class Vorgang {
 	public void setVorgangArtTyp(VorgangArtTyp vorgangArtTyp) {
 		this.vorgangArtTyp = vorgangArtTyp;
 	}
+	
+	public String toString(){
+		return "Vorgang Nr: "+nr+" Typ: "+vorgangArtTyp+" Ruestzeit: "+ruestzeit+" Maschinenzeit: "+maschinenzeit+" Personenzeit: "+personenzeit+"\n";
+	}
+	
+	public boolean equals(Object o){
+	    boolean result = false;
+	    if (o instanceof Bauteil) {
+	        Vorgang that = (Vorgang) o;
+	        result = (this.getArbeitsplan().equals(that.getArbeitsplan())
+	        		&& this.getRuestzeit() == that.getRuestzeit()
+	        		&& this.getMaschinenzeit() == that.getMaschinenzeit()
+	        		&& this.getPersonenzeit() == that.getPersonenzeit());
+	    }
+	    return result;
+	}
 
 }

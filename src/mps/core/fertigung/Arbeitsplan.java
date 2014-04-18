@@ -54,5 +54,19 @@ public class Arbeitsplan {
 		return nr;
 	}
 	
+	public String toString(){
+		StringBuffer vl = new StringBuffer();
+		for(Vorgang v:vorgangListe) vl.append(v.toString());
+		return "Arbeitsplan Nr: "+nr+"\n"+ vl;
+	}
+	
+	public boolean equals(Object o){
+	    boolean result = false;
+	    if (o instanceof Arbeitsplan) {
+	        Arbeitsplan that = (Arbeitsplan) o;
+	        result = (this.getNr() == that.getNr() && this.getBauteil().equals(that.getBauteil()) && this.getVorgangListe().equals(that.getVorgangListe()));
+	    }
+	    return result;
+	}
 
 }

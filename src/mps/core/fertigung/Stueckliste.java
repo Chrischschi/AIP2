@@ -33,6 +33,7 @@ public class Stueckliste {
 		    )
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 
+	
 
 	public String getGueltigAb() {
 		return gueltigAb;
@@ -65,5 +66,23 @@ public class Stueckliste {
 	public void setStuecklistenPosition(
 			Set<StuecklistenPosition> stuecklistenPosition) {
 		this.stuecklistenPosition = stuecklistenPosition;
+	}
+	
+	public String toString(){
+		StringBuffer sl = new StringBuffer();
+		for(StuecklistenPosition sp:stuecklistenPosition) sl.append(sp.toString());
+		return "Stueckliste Nr: "+nr+" gueltig ab "+gueltigAb+" bis "+gueltigBis+"\n"+sl;
+	}
+	
+	public boolean equals(Object o){
+	    boolean result = false;
+	    if (o instanceof Bauteil) {
+	        Stueckliste that = (Stueckliste) o;
+	        result = ( this.getGueltigAb() == that.getGueltigAb() 
+	        		&& this.getGueltigBis().equals(that.getGueltigBis())
+	        		&& this.getBauteil().equals(that.getBauteil())
+	        		&& this.getStuecklistenPosition().equals(that.getStuecklistenPosition()));
+	    }
+	    return result;
 	}
 }

@@ -42,21 +42,23 @@ public class FertigungRepository {
 	
 	// CRUD OPERATIONS ---------------------------------
 	
-	public static void create(Object o){
-		session.save(o);
+	public static long create(Object o){
+		long id = (long) session.save(o);
+		return id;
 	}
 	
 	public static <T> T read(Class<T> t, long id){
+		@SuppressWarnings("unchecked")
 		T object = (T) session.load(t, id);
 		return object;
 	}
-	
 	public static void update(Object o){
 		session.merge(o);
 		
 	}
 	
 	public static <T> void delete(Class<T> t, long id){
+		@SuppressWarnings("unchecked")
 		T object = (T) session.load(t, id);
 		session.delete(object);
 	}
@@ -177,32 +179,45 @@ public class FertigungRepository {
 	// --------------------------------------------------
 	
 	public static void main(String[] args) {
-//----------------------Test Datenbankbefuellung------------------------
-		
-	szenario();
-		
+//----------------------Test Datenbankbefuellung------------------------	
+	szenario();	
 	}
 
 	
 	static void szenario(){
-		erstelleBauteil("Mähdrescher");
+		erstelleBauteil("Maehdrescher");
 		erstelleBauteil("Motor");
 		erstelleBauteil("Reifen");
+		erstelleBauteil("Schrauben");
+		erstelleStueckliste("heute","morgen");
 		erstelleStueckliste("heute","morgen");
 		erstelleStuecklistenPosition(1);
 		erstelleStuecklistenPosition(4);
+		erstelleStuecklistenPosition(20);
+		erstelleArbeitsplan();
 		erstelleArbeitsplan();
 		erstelleVorgang(VorgangArtTyp.MONTAGE, 10, 15, 20);
 		erstelleVorgang(VorgangArtTyp.MONTAGE, 30, 30, 30);
 		erstelleVorgang(VorgangArtTyp.MONTAGE, 35, 40, 50);
+		erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 1, 2, 3);
+		erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 4, 5, 6);
 		assoziationBauteilStueckliste(1,1);
+		assoziationBauteilStueckliste(2,2);
 		assoziationStueckListeStuecklistenPosition(1,1);
 		assoziationStueckListeStuecklistenPosition(1,2);
+		assoziationStueckListeStuecklistenPosition(2,3);
 		assoziationBauteilStuecklistenPosition(2,1);
 		assoziationBauteilStuecklistenPosition(3,2);
+		assoziationBauteilStuecklistenPosition(4,3);
 		assoziationBauteilArbeitsplan(1,1);
+		assoziationBauteilArbeitsplan(2,2);
 		assoziationArbeitsplanVorgang(1,1);
 		assoziationArbeitsplanVorgang(1,2);
 		assoziationArbeitsplanVorgang(1,3);
+		assoziationArbeitsplanVorgang(2,4);
+		assoziationArbeitsplanVorgang(2,5);
+		FertigungService fs = new FertigungService();
+    	fs.fertigungsPlanErstellen(1);
+
 	}
 }

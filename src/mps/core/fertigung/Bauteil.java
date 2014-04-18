@@ -91,7 +91,13 @@ public class Bauteil {
 			Set<StuecklistenPosition> stuecklistenPosition) {
 		this.stuecklistenPosition = stuecklistenPosition;
 	}
-
+	
+	public String toString(){
+		if(stueckliste!=null && arbeitsplan!=null)
+		return "Bauteil Nr: "+nr+" Name: "+ name+"\n"+"["+stueckliste.toString()+"\n"+arbeitsplan.toString()+"]";
+		return "Bauteil Nr: "+nr+" Name: "+ name;
+	}
+	
 //	public Set<Integer> getAngebotsListe() {
 //		return angebotsListe;
 //	}
@@ -100,4 +106,18 @@ public class Bauteil {
 //		this.angebotsListe = angebotsListe;
 //	}
 
+	public boolean equals(Object o){
+	    boolean result = false;
+	    if (o instanceof Bauteil) {
+	        Bauteil that = (Bauteil) o;
+	        result = (this.getNr() == that.getNr() 
+	        		&& this.getName() == that.getName() 
+	        		&& this.getArbeitsplan().equals(that.getArbeitsplan())
+	        		&& this.getStueckliste().equals(that.getStueckliste())
+	        		&& this.getFertigungsauftragListe().equals(that.getFertigungsauftragListe())
+	        		&& this.getStuecklistenPosition().equals(that.getStuecklistenPosition()));
+	    }
+	    return result;
+	}
+	
 }
