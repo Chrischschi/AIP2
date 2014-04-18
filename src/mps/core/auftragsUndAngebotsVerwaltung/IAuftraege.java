@@ -22,4 +22,8 @@ public interface IAuftraege {
 	static EAuftrag getAuftrag(Long auftragNr) {
 		return AuftragRepository.readAuftrag(auftragNr);
 	}
+	
+	static IAuftraege getAuftragService() {
+		return AuftragService.getInstance();
+	}
 }

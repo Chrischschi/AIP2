@@ -3,9 +3,6 @@ package mps.core.fertigung;
 
 import java.util.List;
 import java.util.Set;
-import java.util.function.BiConsumer;
-
-import javax.persistence.Entity;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
