@@ -10,12 +10,12 @@ import javax.persistence.ManyToOne;
 public class StuecklistenPosition {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
+	private Long nr;
 	@ManyToOne
 	private Stueckliste stueckliste;
 	@ManyToOne
 	private Bauteil bauteil;
-	private int menge;
+	private Long menge;
 
 	public Stueckliste getStueckliste() {
 		return stueckliste;
@@ -33,11 +33,11 @@ public class StuecklistenPosition {
 		this.bauteil = bauteil;
 	}
 
-	public int getMenge() {
+	public Long getMenge() {
 		return menge;
 	}
 
-	public void setMenge(int menge) {
+	public void setMenge(Long menge) {
 		this.menge = menge;
 	}
 	

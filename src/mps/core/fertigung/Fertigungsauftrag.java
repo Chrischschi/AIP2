@@ -11,16 +11,16 @@ public class Fertigungsauftrag {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
-	private int auftragsNr;
+	private Long nr;
+	private Long auftragsNr;
 	@ManyToOne
 	private Bauteil bauteil;
 
-	public int getAuftragsNr() {
+	public Long getAuftragsNr() {
 		return auftragsNr;
 	}
 
-	public void setAuftrag(int auftragsNr) {
+	public void setAuftrag(Long auftragsNr) {
 		this.auftragsNr = auftragsNr;
 	}
 
@@ -32,7 +32,7 @@ public class Fertigungsauftrag {
 		this.bauteil = bauteil;
 	}
 
-	public int getNr() {
+	public Long getNr() {
 		return nr;
 	}
 	

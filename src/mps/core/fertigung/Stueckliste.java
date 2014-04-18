@@ -18,7 +18,7 @@ public class Stueckliste {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
+	private Long nr;
 	private String gueltigAb;
 	private String gueltigBis;
 	@OneToOne

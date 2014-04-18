@@ -20,7 +20,7 @@ public class Bauteil {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
+	private Long nr;
 	private String name;
 	@OneToOne
 	private Arbeitsplan arbeitsplan;
@@ -46,7 +46,7 @@ public class Bauteil {
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 	//private Set<Integer> angebotsListe = new HashSet<Integer>();
 
-	public int getNr() {
+	public Long getNr() {
 		return nr;
 	}
 

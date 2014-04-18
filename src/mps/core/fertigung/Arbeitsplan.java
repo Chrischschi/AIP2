@@ -19,7 +19,7 @@ public class Arbeitsplan {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
+	private Long nr;
 	@OneToOne
 	private Bauteil bauteil;
 	@OneToMany(cascade = {CascadeType.ALL})
@@ -46,11 +46,11 @@ public class Arbeitsplan {
 		return vorgangListe;
 	}
 
-	public void setVorgangListe(ArrayList<Vorgang> vorgangListe) {
+	public void setVorgangListe(List<Vorgang> vorgangListe) {
 		this.vorgangListe = vorgangListe;
 	}
 
-	public int getNr() {
+	public Long getNr() {
 		return nr;
 	}
 	

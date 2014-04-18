@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 public class Vorgang {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int nr;
+	private Long nr;
 	@ManyToOne
 	private Arbeitsplan arbeitsplan;
-	private int ruestzeit;
-	private int maschinenzeit;
-	private int personenzeit;
+	private Long ruestzeit;
+	private Long maschinenzeit;
+	private Long personenzeit;
 	@Enumerated(EnumType.STRING)
 	private VorgangArtTyp vorgangArtTyp;
 
@@ -29,27 +29,27 @@ public class Vorgang {
 		this.arbeitsplan = arbeitsplan;
 	}
 
-	public int getRuestzeit() {
+	public Long getRuestzeit() {
 		return ruestzeit;
 	}
 
-	public void setRuestzeit(int ruestzeit) {
+	public void setRuestzeit(Long ruestzeit) {
 		this.ruestzeit = ruestzeit;
 	}
 
-	public int getMaschinenzeit() {
+	public Long getMaschinenzeit() {
 		return maschinenzeit;
 	}
 
-	public void setMaschinenzeit(int maschinenzeit) {
+	public void setMaschinenzeit(Long maschinenzeit) {
 		this.maschinenzeit = maschinenzeit;
 	}
 
-	public int getPersonenzeit() {
+	public Long getPersonenzeit() {
 		return personenzeit;
 	}
 
-	public void setPersonenzeit(int personenzeit) {
+	public void setPersonenzeit(Long personenzeit) {
 		this.personenzeit = personenzeit;
 	}
 
