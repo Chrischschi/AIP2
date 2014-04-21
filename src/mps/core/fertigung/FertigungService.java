@@ -35,22 +35,15 @@ public class FertigungService implements IFertigung {
 	}
 	
 	private void fertigungsplanDrucken(long fid){
-		Path filePath = Paths.get("MPSFertigungsplan.txt"); //eventuell ein unterverzeichnis "outputFiles" einfuehren
+		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
 		FertigungRepository.open();
-	       BufferedWriter writer = null;
-	        try {
-	            writer = new BufferedWriter(new FileWriter(file,true)); 
+			//Using Java 7 feature try-with-resources to close writer after the IO operation
+	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true)); ) {
 	            writer.write(FertigungRepository.read(Fertigungsauftrag.class, fid).toString());
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	        } finally {
-	            try {
-	                // Close the writer regardless of what happens...
-	                writer.close();
-	            } catch (Exception e) {
-	            }
-	        }
-	        FertigungRepository.close();
+	        } //finally block not needed, because writer is closed after the try clock
+	    FertigungRepository.close();
 	}
 }
