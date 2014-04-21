@@ -43,7 +43,7 @@ public class FertigungService implements IFertigung {
 	            writer.write(FertigungRepository.read(Fertigungsauftrag.class, fid).toString());
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	        } //finally block not needed, because writer is closed after the try clock
+	        } //finally block not needed, because writer is closed after the try block
 	    FertigungRepository.close();
 	}
 }
