@@ -1,6 +1,9 @@
 package mps.core.fertigung;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Set;
 
 
@@ -32,10 +35,12 @@ public class FertigungService implements IFertigung {
 	}
 	
 	private void fertigungsplanDrucken(long fid){
+		Path filePath = Paths.get("MPSFertigungsplan.txt"); //eventuell ein unterverzeichnis "outputFiles" einfuehren
+		File file = filePath.toAbsolutePath().toFile();
 		FertigungRepository.open();
 	       BufferedWriter writer = null;
 	        try {
-	            writer = new BufferedWriter(new FileWriter("C:/test.txt",true));
+	            writer = new BufferedWriter(new FileWriter(file,true)); 
 	            writer.write(FertigungRepository.read(Fertigungsauftrag.class, fid).toString());
 	        } catch (Exception e) {
 	            e.printStackTrace();
