@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class FertigungService implements IFertigung {
 		String output = FertigungRepository.read(Fertigungsauftrag.class, fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
 	        try(Writer out = new BufferedWriter(new OutputStreamWriter(
-        			new FileOutputStream(file), "UTF8"))){
+        			new FileOutputStream(file), Charset.forName("UTF-8")))){
 	        	
 	        	out.append(output);
 	        	out.flush();
