@@ -8,7 +8,7 @@ import java.util.Set;
 
 
 public class FertigungService implements IFertigung {
-	public long fertigungsPlanErstellen(long auftragNr){
+	public Long fertigungsPlanErstellen(Long auftragNr){
 		FertigungRepository.open();
 		
 		//TODO when Auftrag done
@@ -34,7 +34,7 @@ public class FertigungService implements IFertigung {
 		return fid;
 	}
 	
-	private void fertigungsplanDrucken(long fid){
+	private void fertigungsplanDrucken(Long fid){
 		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
 		FertigungRepository.open();
