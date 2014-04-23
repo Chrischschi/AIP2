@@ -49,9 +49,7 @@ public class StuecklistenPosition {
 	    boolean result = false;
 	    if (o instanceof Bauteil) {
 	        StuecklistenPosition that = (StuecklistenPosition) o;
-	        result = (this.getMenge() == that.getMenge() 
-	        		&& this.getBauteil().equals(that.getBauteil())
-	        		&& this.getStueckliste().equals(that.getStueckliste()));
+	        result = (this.getMenge() == that.getMenge());
 	    }
 	    return result;
 	}

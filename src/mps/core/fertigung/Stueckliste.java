@@ -79,9 +79,7 @@ public class Stueckliste {
 	    if (o instanceof Bauteil) {
 	        Stueckliste that = (Stueckliste) o;
 	        result = ( this.getGueltigAb() == that.getGueltigAb() 
-	        		&& this.getGueltigBis().equals(that.getGueltigBis())
-	        		&& this.getBauteil().equals(that.getBauteil())
-	        		&& this.getStuecklistenPosition().equals(that.getStuecklistenPosition()));
+	        		&& this.getGueltigBis().equals(that.getGueltigBis()));
 	    }
 	    return result;
 	}

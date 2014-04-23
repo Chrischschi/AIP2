@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,7 +45,8 @@ public class Bauteil {
 		        @JoinColumn(name="STUECKLISTENPOSITION_ID")
 		    )
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
-	//private Set<Integer> angebotsListe = new HashSet<Integer>();
+	@ElementCollection
+	private Set<Integer> angebotsListe = new HashSet<Integer>();
 
 	public Long getNr() {
 		return nr;
@@ -98,24 +100,20 @@ public class Bauteil {
 		return "Bauteil Nr: "+nr+" Name: "+ name;
 	}
 	
-//	public Set<Integer> getAngebotsListe() {
-//		return angebotsListe;
-//	}
-//
-//	public void setAngebotsListe(HashSet<Integer> angebotsListe) {
-//		this.angebotsListe = angebotsListe;
-//	}
+	public Set<Integer> getAngebotsListe() {
+		return angebotsListe;
+	}
 
+	public void setAngebotsListe(HashSet<Integer> angebotsListe) {
+		this.angebotsListe = angebotsListe;
+	}
+
+	@Override
 	public boolean equals(Object o){
 	    boolean result = false;
 	    if (o instanceof Bauteil) {
 	        Bauteil that = (Bauteil) o;
-	        result = (this.getNr() == that.getNr() 
-	        		&& this.getName() == that.getName() 
-	        		&& this.getArbeitsplan().equals(that.getArbeitsplan())
-	        		&& this.getStueckliste().equals(that.getStueckliste())
-	        		&& this.getFertigungsauftragListe().equals(that.getFertigungsauftragListe())
-	        		&& this.getStuecklistenPosition().equals(that.getStuecklistenPosition()));
+	        result = (this.getName() == that.getName());
 	    }
 	    return result;
 	}

@@ -21,6 +21,4 @@ public interface IFertigung {
 	 */
 	Long fertigungsPlanErstellen(Long auftragNr);
 	
-	/**Weitere Operationen*/
-	//void fertige(long fertigungsAuftragId); //soll durch was sinnvolleres ersetzt werden oder komplett gestrichen werden
 }

@@ -40,14 +40,12 @@ public class Fertigungsauftrag {
 		return "Fertigungsauftrag Nr: "+nr+"\n"+bauteil.toString();
 	}
 	
-	public boolean equals(Object o){
-	    boolean result = false;
-	    if (o instanceof Fertigungsauftrag) {
-	        Fertigungsauftrag that = (Fertigungsauftrag) o;
-	        result = (this.getNr() == that.getNr() 
-	        		&& this.getAuftragsNr() == that.getAuftragsNr() 
-	        		&& this.getBauteil().equals(that.getBauteil()));
-	    }
-	    return result;
-	}
+//	public boolean equals(Object o){
+//	    boolean result = false;
+//	    if (o instanceof Fertigungsauftrag) {
+//	        Fertigungsauftrag that = (Fertigungsauftrag) o;
+//	        result = (this.getNr() == that.getNr());
+//	    }
+//	    return result;
+//	}
 }

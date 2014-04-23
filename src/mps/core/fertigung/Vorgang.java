@@ -69,8 +69,7 @@ public class Vorgang {
 	    boolean result = false;
 	    if (o instanceof Bauteil) {
 	        Vorgang that = (Vorgang) o;
-	        result = (this.getArbeitsplan().equals(that.getArbeitsplan())
-	        		&& this.getRuestzeit() == that.getRuestzeit()
+	        result = (this.getRuestzeit() == that.getRuestzeit()
 	        		&& this.getMaschinenzeit() == that.getMaschinenzeit()
 	        		&& this.getPersonenzeit() == that.getPersonenzeit());
 	    }

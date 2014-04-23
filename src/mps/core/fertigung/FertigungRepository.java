@@ -13,7 +13,7 @@ import org.hibernate.service.ServiceRegistry;
 
 public class FertigungRepository {
 	
-	private static SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory = createSessionFactory();
 	private static ServiceRegistry serviceRegistry;
 	private static Session session;
 
@@ -29,7 +29,6 @@ public class FertigungRepository {
 	
 	
 	public static void open(){
-		sessionFactory = createSessionFactory();
 		session = sessionFactory.openSession();
 		session.beginTransaction();	
 	}
@@ -37,7 +36,6 @@ public class FertigungRepository {
 	public static void close(){
 		session.getTransaction().commit();
 		session.close();
-		sessionFactory.close();
 	}
 	
 	// CRUD OPERATIONS ---------------------------------
@@ -178,12 +176,19 @@ public class FertigungRepository {
 	
 	// --------------------------------------------------
 	
+	public static Session getSession() {
+		return session;
+	}
+	
 	public static void main(String[] args) {
 //----------------------Test Datenbankbefuellung------------------------	
 	szenario();	
+	sessionFactory.close();
 	}
 
 	
+
+
 	static void szenario(){
 		erstelleBauteil("Maehdrescher");
 		erstelleBauteil("Motor");

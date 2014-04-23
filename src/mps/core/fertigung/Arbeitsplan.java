@@ -64,7 +64,8 @@ public class Arbeitsplan {
 	    boolean result = false;
 	    if (o instanceof Arbeitsplan) {
 	        Arbeitsplan that = (Arbeitsplan) o;
-	        result = (this.getNr() == that.getNr() && this.getBauteil().equals(that.getBauteil()) && this.getVorgangListe().equals(that.getVorgangListe()));
+	        result = (this.getBauteil().equals(that.getBauteil()) && 
+	        		this.getVorgangListe().equals(that.getVorgangListe()));
 	    }
 	    return result;
 	}
