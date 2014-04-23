@@ -1,6 +1,5 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
-import mps.core.fertigung.Fertigungsauftrag;
 
 public class Auftrag implements EAuftrag {
 	
@@ -10,6 +9,7 @@ public class Auftrag implements EAuftrag {
 	private String beauftragtAm;
 	
 	/** Referenzen */
+	private Angebot angebot = null;
 	private Long fertigungsauftragNr; 
 
 	@Override
@@ -55,6 +55,32 @@ public class Auftrag implements EAuftrag {
 	 */
 	public void setFertigungsauftragNr(Long fertigungsauftragNr) {
 		this.fertigungsauftragNr = fertigungsauftragNr;
+	}
+
+	public Angebot getAngebot() {
+		return angebot;
+	}
+
+	public void setAngebot(Angebot angebot) {
+		this.angebot = angebot;
+	}
+	
+	@Override 
+	/** use business-key equality for implementing equals */
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Auftrag)) return false;
+		Auftrag that = (Auftrag)o;
+		return this.getIstAbgeschlossen() == that.getIstAbgeschlossen() && 
+			   this.getBeauftragtAm().equals(that.getBeauftragtAm());
+	}
+
+	public static Auftrag create(boolean istAbgeschlossen, String beauftragtAm) {
+		Auftrag auftrag = new Auftrag();
+		auftrag.setIstAbgeschlossen(istAbgeschlossen);
+		auftrag.setBeauftragtAm(beauftragtAm);
+		
+		return auftrag;
 	}
 
 }

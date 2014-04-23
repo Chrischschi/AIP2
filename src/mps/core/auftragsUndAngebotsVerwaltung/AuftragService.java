@@ -1,7 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 //TODO The whole class
-public class AuftragService implements IAuftraege {
+public final class AuftragService implements IAuftraege {
 	private static final AuftragService INSTANCE = new AuftragService();
 	
 	private AuftragService() {}
@@ -12,8 +12,8 @@ public class AuftragService implements IAuftraege {
 
 	@Override
 	public Long getBauteilIdOfAutrag(Long auftragNr) {
-		// TODO Auto-generated method stub
-		return new Long(0); 
+		Auftrag auftrag = (Auftrag) AuftragRepository.readAuftrag(auftragNr);
+		return auftrag.getAngebot().getBauteilNr(); //Quick and dirty
 	}
 	 
 	 
