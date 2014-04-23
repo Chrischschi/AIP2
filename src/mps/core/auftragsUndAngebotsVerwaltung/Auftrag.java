@@ -10,7 +10,7 @@ public class Auftrag implements EAuftrag {
 	private String beauftragtAm;
 	
 	/** Referenzen */
-	private Fertigungsauftrag fertigungsAuftrag; //Objektreferenz oder doch besser long?
+	private Long fertigungsauftragNr; 
 
 	@Override
 	public Long getNr() {
@@ -44,17 +44,17 @@ public class Auftrag implements EAuftrag {
 	}
 
 	/**
-	 * @return the fertigungsAuftrag
+	 * @return the ID of the Fertigungsauftrag
 	 */
-	public Fertigungsauftrag getFertigungsAuftrag() {
-		return fertigungsAuftrag;
+	public Long getFertigungsauftragNr() {
+		return fertigungsauftragNr;
 	}
 
 	/**
-	 * @param fertigungsAuftrag the fertigungsAuftrag to set
+	 * @param fertigungsAuftrag the ID of the Fertigungsauftrag to set
 	 */
-	public void setFertigungsAuftrag(Fertigungsauftrag fertigungsAuftrag) {
-		this.fertigungsAuftrag = fertigungsAuftrag;
+	public void setFertigungsauftragNr(Long fertigungsauftragNr) {
+		this.fertigungsauftragNr = fertigungsauftragNr;
 	}
 
 }

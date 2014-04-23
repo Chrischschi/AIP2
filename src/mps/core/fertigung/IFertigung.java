@@ -19,7 +19,7 @@ public interface IFertigung {
 	 * Alternativ wird hier nur eine textuelle Form der im Datenmodell 
 	 * der Komponente "Fertigung" hinterlegte Daten ausgegeben.  
 	 */
-	long fertigungsPlanErstellen(long auftragNr);
+	Long fertigungsPlanErstellen(Long auftragNr);
 	
 	/**Weitere Operationen*/
 	//void fertige(long fertigungsAuftragId); //soll durch was sinnvolleres ersetzt werden oder komplett gestrichen werden

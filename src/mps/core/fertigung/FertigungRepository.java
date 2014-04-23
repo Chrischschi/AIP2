@@ -217,7 +217,7 @@ public class FertigungRepository {
 		assoziationArbeitsplanVorgang(2,4);
 		assoziationArbeitsplanVorgang(2,5);
 		FertigungService fs = new FertigungService();
-    	fs.fertigungsPlanErstellen(1);
+    	fs.fertigungsPlanErstellen(new Long(1));
 
 	}
 }
