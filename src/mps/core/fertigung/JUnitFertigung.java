@@ -49,8 +49,6 @@ public class JUnitFertigung {
 		assoziationArbeitsplanVorgang(1,1);
 		assoziationArbeitsplanVorgang(1,2);
 		assoziationArbeitsplanVorgang(1,3);
-		FertigungService fs = new FertigungService();
-    	fs.fertigungsPlanErstellen(new Long(1));
     	
 		
 		maehdrescher.setName("Maehdrescher");
