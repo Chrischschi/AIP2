@@ -1,7 +1,9 @@
 package mps.core.fertigung;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
@@ -38,12 +40,18 @@ public class FertigungService implements IFertigung {
 		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
 		FertigungRepository.open();
+		String output = FertigungRepository.read(Fertigungsauftrag.class, fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
-	        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,true)); ) {
-	            writer.write(FertigungRepository.read(Fertigungsauftrag.class, fid).toString());
+	        try{
+	        	Writer out = new BufferedWriter(new OutputStreamWriter(
+	        			new FileOutputStream(file), "UTF8"));
+	        	out.append(output);
+	        	out.flush();
+	    		out.close();
+	        	
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	        } //finally block not needed, because writer is closed after the try block
+	        }
 	    FertigungRepository.close();
 	}
 }
