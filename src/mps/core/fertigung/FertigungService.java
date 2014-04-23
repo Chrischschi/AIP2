@@ -42,12 +42,11 @@ public class FertigungService implements IFertigung {
 		FertigungRepository.open();
 		String output = FertigungRepository.read(Fertigungsauftrag.class, fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
-	        try{
-	        	Writer out = new BufferedWriter(new OutputStreamWriter(
-	        			new FileOutputStream(file), "UTF8"));
+	        try(Writer out = new BufferedWriter(new OutputStreamWriter(
+        			new FileOutputStream(file), "UTF8"))){
+	        	
 	        	out.append(output);
 	        	out.flush();
-	    		out.close();
 	        	
 	        } catch (Exception e) {
 	            e.printStackTrace();
