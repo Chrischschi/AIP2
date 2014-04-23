@@ -113,7 +113,7 @@ public class Bauteil {
 	    boolean result = false;
 	    if (o instanceof Bauteil) {
 	        Bauteil that = (Bauteil) o;
-	        result = (this.getName() == that.getName());
+	        result = (this.getName().equals(that.getName()));
 	    }
 	    return result;
 	}

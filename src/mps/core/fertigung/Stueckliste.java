@@ -74,11 +74,12 @@ public class Stueckliste {
 		return "Stueckliste Nr: "+nr+" gueltig ab "+gueltigAb+" bis "+gueltigBis+"\n"+sl;
 	}
 	
+	@Override
 	public boolean equals(Object o){
 	    boolean result = false;
-	    if (o instanceof Bauteil) {
+	    if (o instanceof Stueckliste) {
 	        Stueckliste that = (Stueckliste) o;
-	        result = ( this.getGueltigAb() == that.getGueltigAb() 
+	        result = ( this.getGueltigAb().equals(that.getGueltigAb()) 
 	        		&& this.getGueltigBis().equals(that.getGueltigBis()));
 	    }
 	    return result;

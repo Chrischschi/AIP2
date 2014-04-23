@@ -67,7 +67,7 @@ public class Vorgang {
 	
 	public boolean equals(Object o){
 	    boolean result = false;
-	    if (o instanceof Bauteil) {
+	    if (o instanceof Vorgang) {
 	        Vorgang that = (Vorgang) o;
 	        result = (this.getRuestzeit() == that.getRuestzeit()
 	        		&& this.getMaschinenzeit() == that.getMaschinenzeit()

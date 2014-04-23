@@ -71,7 +71,7 @@ public class JUnitFertigung {
 		motor.setStuecklistenPosition(stpositionListe2);
 		
 		stueckliste1.setGueltigAb("23-04-2014");
-		stueckliste1.setGueltigBis("23-04-2014");
+		stueckliste1.setGueltigBis("24-04-2014");
 		stueckliste1.setBauteil(maehdrescher);
 		Set<StuecklistenPosition> stpositionListe3 = new HashSet<StuecklistenPosition>();
 		stpositionListe3.add(stposition1);
@@ -82,9 +82,9 @@ public class JUnitFertigung {
 		stposition1.setBauteil(motor);
 		stposition1.setStueckliste(stueckliste1);
 		
-		stposition1.setMenge(4l);
-		stposition1.setBauteil(reifen);
-		stposition1.setStueckliste(stueckliste1);
+		stposition2.setMenge(4l);
+		stposition2.setBauteil(reifen);
+		stposition2.setStueckliste(stueckliste1);
 		
 		arbeitsplan1.setBauteil(maehdrescher);
 		List<Vorgang> vorgangListe1 = new ArrayList<Vorgang>();
@@ -114,19 +114,25 @@ public class JUnitFertigung {
 	}
 	
 	@Test
-	public void test() {
+	public void testEquals() {
 		open();
-		Bauteil b = read(Bauteil.class,2);
-		Assert.assertEquals(b,motor);
+		assertEquals(read(Bauteil.class,1),maehdrescher);
+		assertEquals(read(Bauteil.class,2),motor);
+		assertEquals(read(Bauteil.class,3),reifen);
+		assertEquals(read(Stueckliste.class,1),stueckliste1);
+		assertEquals(read(StuecklistenPosition.class,1),stposition1);
+		assertEquals(read(StuecklistenPosition.class,2),stposition2);
+		assertEquals(read(Arbeitsplan.class,1),arbeitsplan1);
+		assertEquals(read(Vorgang.class,1),vorgang1);
+		assertEquals(read(Vorgang.class,2),vorgang2);
+		assertEquals(read(Vorgang.class,3),vorgang3);
 		close();
-		
 	}
 	
-	@After
-	public void setdown(){
-		open();
-		getSession().createSQLQuery("DROP SCHEMA mps");
-		close();
-	}
-	
+//	@After
+//	public void setdown(){
+//		open();
+//		getSession().createSQLQuery("DROP SCHEMA mps");
+//		close();
+//	}
 }

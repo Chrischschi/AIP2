@@ -45,10 +45,11 @@ public class StuecklistenPosition {
 		return "Menge: "+menge+" - "+bauteil.toString()+"\n";
 	}
 	
+	@Override
 	public boolean equals(Object o){
 	    boolean result = false;
-	    if (o instanceof Bauteil) {
-	        StuecklistenPosition that = (StuecklistenPosition) o;
+	    if (o instanceof StuecklistenPosition) {
+	    	StuecklistenPosition that = (StuecklistenPosition) o;
 	        result = (this.getMenge() == that.getMenge());
 	    }
 	    return result;
