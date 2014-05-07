@@ -4,7 +4,7 @@ import org.hibernate.Session;
 
 public class AuftragRepository {
 
-	public static Auftrag readAuftrag(Long auftragNr) {
+	 static EAuftrag readAuftrag(Long auftragNr) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
