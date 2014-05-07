@@ -3,6 +3,7 @@ package mps.core.auftragsUndAngebotsVerwaltung;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 /** Utility class for Hibernate boilerplate code. */
 class HibernateUtil {
@@ -11,7 +12,9 @@ class HibernateUtil {
     private static SessionFactory buildSessionFactory() {
         try {
             // Create the SessionFactory from hibernate.cfg.xml
-            return new Configuration().configure("hibernate.cfg.xml").buildSessionFactory(new StandardServiceRegistryBuilder().build());
+        	Configuration configuration = new Configuration().configure();
+        	ServiceRegistry ssr = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            return  configuration.buildSessionFactory(ssr);
         }
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed

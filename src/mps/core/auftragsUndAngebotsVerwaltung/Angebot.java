@@ -1,8 +1,17 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Angebot {
 	
 	/**Attribute */ 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 
 	private String gueltigAb;
 	private String gueltigBis;
@@ -10,9 +19,11 @@ public class Angebot {
 	
 	/** Referenzen */
 	//Komponenten-intern
+	@OneToOne
 	private Auftrag auftrag;
 	//Komponenten-extern
 	private Long bauteilNr;
+	//referenz zu Kunde fehlt erstmal absichtlich
 	
 	/** Factory Method */
 	public static Angebot create(String gueltigAb,String gueltigBis,Integer preis) {

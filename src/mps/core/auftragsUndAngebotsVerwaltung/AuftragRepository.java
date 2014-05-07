@@ -4,11 +4,14 @@ import org.hibernate.Session;
 
 public class AuftragRepository {
 
-	public static EAuftrag readAuftrag(Long auftragNr) {
+	public static Auftrag readAuftrag(Long auftragNr) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
-		Auftrag auftrag = (Auftrag) session.load(Auftrag.class, auftragNr);
+		Auftrag auftrag = (Auftrag) session
+				.createQuery("SELECT a FROM Auftrag a LEFT JOIN FETCH a.angebot WHERE a.nr = :aNr")
+				.setParameter("aNr", auftragNr)
+				.uniqueResult();
 		
 		session.getTransaction().commit();
 		

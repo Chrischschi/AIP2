@@ -1,14 +1,23 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Auftrag implements EAuftrag {
 	
 	/** Attribute */
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 
 	private Boolean istAbgeschlossen;
 	private String beauftragtAm;
 	
 	/** Referenzen */
+	@OneToOne
 	private Angebot angebot = null;
 	private Long fertigungsauftragNr; 
 
