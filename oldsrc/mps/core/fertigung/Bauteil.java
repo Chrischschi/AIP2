@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -25,8 +27,24 @@ public class Bauteil {
 	private Arbeitsplan arbeitsplan;
 	@OneToOne
 	private Stueckliste stueckliste;
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinTable(
+		    name="BAUTEIL_FERTIGUNGSAUFTRAG",
+		    joinColumns=
+		        @JoinColumn(name="BAUTEIL_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="FERTIGUNGSAUFTRAG_ID")
+		    )
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinTable(
+		    name="BAUTEIL_STUECKLISTENPOSITION",
+		    joinColumns=
+		        @JoinColumn(name="BAUTEIL_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="STUECKLISTENPOSITION_ID")
+		    )
+	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 	@ElementCollection
 	private Set<Integer> angebotsListe = new HashSet<Integer>();
 
@@ -65,6 +83,15 @@ public class Bauteil {
 	public void setFertigungsauftragListe(
 			Set<Fertigungsauftrag> fertigungsauftragListe) {
 		this.fertigungsauftragListe = fertigungsauftragListe;
+	}
+
+	public Set<StuecklistenPosition> getStuecklistenPosition() {
+		return stuecklistenPosition;
+	}
+
+	public void setStuecklistenPosition(
+			Set<StuecklistenPosition> stuecklistenPosition) {
+		this.stuecklistenPosition = stuecklistenPosition;
 	}
 	
 	public String toString(){

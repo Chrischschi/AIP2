@@ -9,7 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Arbeitsplan {
@@ -17,8 +20,27 @@ public class Arbeitsplan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr;
-	@OneToMany
+	@OneToOne
+	private Bauteil bauteil;
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinTable(
+		    name="ARBEITSPLAN_VORGANG",
+		    joinColumns=
+		        @JoinColumn(name="ARBEITSPLAN_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="VORGANG_ID")
+		    )
 	private List<Vorgang> vorgangListe = new ArrayList<Vorgang>();
+	
+	
+
+	public Bauteil getBauteil() {
+		return bauteil;
+	}
+
+	public void setBauteil(Bauteil bauteil) {
+		this.bauteil = bauteil;
+	}
 
 	public List<Vorgang> getVorgangListe() {
 		return vorgangListe;
@@ -42,8 +64,9 @@ public class Arbeitsplan {
 	    boolean result = false;
 	    if (o instanceof Arbeitsplan) {
 	        Arbeitsplan that = (Arbeitsplan) o;
-	        result = this.getVorgangListe().size() == that.getVorgangListe().size() 
-	        		&& this.getVorgangListe().containsAll(that.getVorgangListe());
+	        result = (this.getBauteil().equals(that.getBauteil()) 
+	        		&& this.getVorgangListe().size() == that.getVorgangListe().size() 
+	        		&& this.getVorgangListe().containsAll(that.getVorgangListe()) );
 	    }
 	    return result;
 	}

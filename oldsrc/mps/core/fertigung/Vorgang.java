@@ -6,17 +6,28 @@ import javax.persistence.EnumType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Vorgang {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr;
+	@ManyToOne
+	private Arbeitsplan arbeitsplan;
 	private Long ruestzeit;
 	private Long maschinenzeit;
 	private Long personenzeit;
 	@Enumerated(EnumType.STRING)
 	private VorgangArtTyp vorgangArtTyp;
+
+	public Arbeitsplan getArbeitsplan() {
+		return arbeitsplan;
+	}
+
+	public void setArbeitsplan(Arbeitsplan arbeitsplan) {
+		this.arbeitsplan = arbeitsplan;
+	}
 
 	public Long getRuestzeit() {
 		return ruestzeit;

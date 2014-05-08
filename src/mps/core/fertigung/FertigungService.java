@@ -9,28 +9,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Set;
 
+import mps.core.fertigung.dao.BauteilManager;
+import mps.core.fertigung.dao.FertigungsauftragManager;
+
 
 public class FertigungService implements IFertigung {
 	public Long fertigungsPlanErstellen(Long auftragNr){
-		FertigungRepository.open();
-		
 		//TODO when Auftrag done
 		long bid = 1;
 		//long bid = IAuftraege.getAuftragService().getBauteilIdOfAutrag(auftragNr);
 		//IAuftraege a = FertigungRepository.read(IAuftraege.class,auftragNr);
 		
 		Fertigungsauftrag f = new Fertigungsauftrag();
-		long fid = FertigungRepository.create(f);
-		Bauteil b = FertigungRepository.read(Bauteil.class, bid);
-		f = FertigungRepository.read(Fertigungsauftrag.class, fid);
+		//long fid = FertigungsauftragManager.
+		Bauteil b = BauteilManager.loadBauteil(bid);
 		f.setAuftrag(auftragNr);
 		f.setBauteil(b);
-		Set<Fertigungsauftrag> fl= b.getFertigungsauftragListe();
-		fl.add(f);
-		b.setFertigungsauftragListe(fl);
-		FertigungRepository.update(f);
-		FertigungRepository.update(b);
-		FertigungRepository.close();
+		long fid = FertigungsauftragManager.saveFertigungsauftrag(f);
 		
 		fertigungsplanDrucken(fid);
 		
@@ -40,8 +35,7 @@ public class FertigungService implements IFertigung {
 	private void fertigungsplanDrucken(Long fid){
 		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
-		FertigungRepository.open();
-		String output = FertigungRepository.read(Fertigungsauftrag.class, fid).toString();
+		String output = FertigungsauftragManager.loadFertigungsauftrag(fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
 	        try(Writer out = new BufferedWriter(new OutputStreamWriter(
         			new FileOutputStream(file), Charset.forName("UTF-8")))){
@@ -52,6 +46,5 @@ public class FertigungService implements IFertigung {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	    FertigungRepository.close();
 	}
 }

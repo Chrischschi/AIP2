@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Stueckliste {
@@ -18,7 +21,16 @@ public class Stueckliste {
 	private Long nr;
 	private String gueltigAb;
 	private String gueltigBis;
-	@OneToMany
+	@OneToOne
+	private Bauteil bauteil;
+	@OneToMany(cascade = {CascadeType.ALL})
+	@JoinTable(
+		    name="STUECKLISTE_STUECKLISTENPOSITION",
+		    joinColumns=
+		        @JoinColumn(name="STUECKLISTE_ID"),
+		    inverseJoinColumns=
+		        @JoinColumn(name="STUECKLISTENPOSITION_ID")
+		    )
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 
 	
@@ -39,6 +51,13 @@ public class Stueckliste {
 		this.gueltigBis = gueltigBis;
 	}
 
+	public Bauteil getBauteil() {
+		return bauteil;
+	}
+
+	public void setBauteil(Bauteil bauteil) {
+		this.bauteil = bauteil;
+	}
 
 	public Set<StuecklistenPosition> getStuecklistenPosition() {
 		return stuecklistenPosition;

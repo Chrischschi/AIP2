@@ -1,8 +1,16 @@
 package mps.core.fertigung;
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import mps.core.fertigung.dao.ArbeitsplanManager;
+import mps.core.fertigung.dao.BauteilManager;
+import mps.core.fertigung.dao.StuecklisteManager;
+import mps.core.fertigung.dao.StuecklistenPositionManager;
+import mps.core.fertigung.dao.VorgangManager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -13,214 +21,133 @@ import org.hibernate.service.ServiceRegistry;
 
 public class FertigungRepository {
 	
-	private static SessionFactory sessionFactory = createSessionFactory();
-	private static ServiceRegistry serviceRegistry;
-	private static Session session;
-
-	/** Create Operations */
-	public static SessionFactory createSessionFactory() {
-	    Configuration configuration = new Configuration();
-	    configuration.configure();
-	    serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-	            configuration.getProperties()).build();
-	    sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-	    return sessionFactory;
-	}
-	
-	
-	public static void open(){
-		session = sessionFactory.openSession();
-		session.beginTransaction();	
-	}
-	
-	public static void close(){
-		session.getTransaction().commit();
-		session.close();
-	}
-	
-	// CRUD OPERATIONS ---------------------------------
-	
-	public static long create(Object o){
-		long id = (long) session.save(o);
-		return id;
-	}
-	
-	public static <T> T read(Class<T> t, long id){
-		@SuppressWarnings("unchecked")
-		T object = (T) session.load(t, id);
-		return object;
-	}
-	public static void update(Object o){
-		session.merge(o);
-		
-	}
-	
-	public static <T> void delete(Class<T> t, long id){
-		@SuppressWarnings("unchecked")
-		T object = (T) session.load(t, id);
-		session.delete(object);
-	}
 
 	// --------------------------------------------------
 	
 	// DATENTYP IN DATENBANK ERSTELLEN ------------------
 	
-	public static void erstelleBauteil(String name){
-		open();
+	public static Bauteil erstelleBauteil(String name, Stueckliste stueckliste, Arbeitsplan arbeitsplan){
 		Bauteil b = new Bauteil();
 		b.setName(name);
-		create(b);
-		close();
+		b.setStueckliste(stueckliste);
+		b.setArbeitsplan(arbeitsplan);
+		return b;
 		}
 	
-	public static void erstelleStueckliste(String gueltigAb,String gueltigBis){
-		open();
+	public static Stueckliste erstelleStueckliste(String gueltigAb,String gueltigBis,Set<StuecklistenPosition> stuecklistenposition){
 		Stueckliste s = new Stueckliste();
 		s.setGueltigAb(gueltigAb);
 		s.setGueltigBis(gueltigBis);
-		create(s);
-		close();
+		s.setStuecklistenPosition(stuecklistenposition);
+		return s;
 	}
 	
-	public static void erstelleStuecklistenPosition(long menge){
-		open();
+	public static StuecklistenPosition erstelleStuecklistenPosition(long menge, Bauteil bauteil){
 		StuecklistenPosition sp = new StuecklistenPosition();
 		sp.setMenge(menge);
-		create(sp);
-		close();
+		sp.setBauteil(bauteil);
+		return sp;
 	}
 	
-	public static void erstelleArbeitsplan(){
-		open();
+	public static Arbeitsplan erstelleArbeitsplan(List<Vorgang> vorgaenge){
 		Arbeitsplan a = new Arbeitsplan();
-		create(a);
-		close();
+		a.setVorgangListe(vorgaenge);
+		return a;
 	}
 	
-	public static void erstelleVorgang(VorgangArtTyp typ, long ruestzeit, long maschinenzeit, long personenzeit){
-		open();
+	public static Vorgang erstelleVorgang(VorgangArtTyp typ, long ruestzeit, long maschinenzeit, long personenzeit){
 		Vorgang v = new Vorgang();
 		v.setVorgangArtTyp(typ);
 		v.setRuestzeit(ruestzeit);
 		v.setMaschinenzeit(maschinenzeit);
 		v.setPersonenzeit(personenzeit);
-		create(v);
-		close();
+		return v;
 	}
 	
 	// --------------------------------------------------
 	
-	// ASSOZIATIONEN IN DATENBANK ERSTELLEN ------------------
 	
-	public static void assoziationBauteilArbeitsplan(long b_id, long a_id){
-		open();
-		Bauteil b = read(Bauteil.class,b_id);
-		Arbeitsplan a = read(Arbeitsplan.class,a_id);
-		b.setArbeitsplan(a);
-		a.setBauteil(b);
-		update(b);
-		update(a);
-		close();
-	}
-	
-	public static void assoziationArbeitsplanVorgang(long a_id, long v_id){
-		open();
-		Arbeitsplan a = read(Arbeitsplan.class,a_id);
-		Vorgang v = read(Vorgang.class,v_id);
-		List<Vorgang> temp = a.getVorgangListe();
-		temp.add(v);
-		a.setVorgangListe(temp);
-		v.setArbeitsplan(a);
-		update(a);
-		update(v);
-		close();
-	}
-	
-	public static void assoziationStueckListeStuecklistenPosition(long s_id, long sp_id){
-		open();
-		Stueckliste s = read(Stueckliste.class,s_id);
-		StuecklistenPosition sp = read(StuecklistenPosition.class,sp_id);
-		Set<StuecklistenPosition> temp = s.getStuecklistenPosition();
-		temp.add(sp);
-		s.setStuecklistenPosition(temp);
-		sp.setStueckliste(s);
-		update(s);
-		update(sp);
-		close();
-	}
-	
-	
-	public static void assoziationBauteilStuecklistenPosition(long b_id, long sp_id){
-		open();
-		Bauteil b = read(Bauteil.class,b_id);
-		StuecklistenPosition sp = read(StuecklistenPosition.class,sp_id);
-		Set<StuecklistenPosition> temp = b.getStuecklistenPosition();
-		temp.add(sp);
-		b.setStuecklistenPosition( temp);
-		sp.setBauteil(b);
-		update(b);
-		update(sp);
-		close();
-	}
-	
-	public static void assoziationBauteilStueckliste(long b_id, long s_id){
-		open();
-		Bauteil b = read(Bauteil.class,b_id);
-		Stueckliste s = read(Stueckliste.class,s_id);
-		b.setStueckliste(s);
-		s.setBauteil(b);
-		update(b);
-		update(s);
-		close();
-	}
-	
-	// --------------------------------------------------
-	
-	public static Session getSession() {
-		return session;
-	}
 	
 	public static void main(String[] args) {
 //----------------------Test Datenbankbefuellung------------------------	
 	szenario();	
-	sessionFactory.close();
 	}
 
 	
 
 
 	static void szenario(){
-		erstelleBauteil("Maehdrescher");
-		erstelleBauteil("Motor");
-		erstelleBauteil("Reifen");
-		erstelleBauteil("Schrauben");
-		erstelleStueckliste("heute","morgen");
-		erstelleStueckliste("heute","morgen");
-		erstelleStuecklistenPosition(1);
-		erstelleStuecklistenPosition(4);
-		erstelleStuecklistenPosition(20);
-		erstelleArbeitsplan();
-		erstelleArbeitsplan();
-		erstelleVorgang(VorgangArtTyp.MONTAGE, 10, 15, 20);
-		erstelleVorgang(VorgangArtTyp.MONTAGE, 30, 30, 30);
-		erstelleVorgang(VorgangArtTyp.MONTAGE, 35, 40, 50);
-		erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 1, 2, 3);
-		erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 4, 5, 6);
-		assoziationBauteilStueckliste(1,1);
-		assoziationBauteilStueckliste(2,2);
-		assoziationStueckListeStuecklistenPosition(1,1);
-		assoziationStueckListeStuecklistenPosition(1,2);
-		assoziationStueckListeStuecklistenPosition(2,3);
-		assoziationBauteilStuecklistenPosition(2,1);
-		assoziationBauteilStuecklistenPosition(3,2);
-		assoziationBauteilStuecklistenPosition(4,3);
-		assoziationBauteilArbeitsplan(1,1);
-		assoziationBauteilArbeitsplan(2,2);
-		assoziationArbeitsplanVorgang(1,1);
-		assoziationArbeitsplanVorgang(1,2);
-		assoziationArbeitsplanVorgang(1,3);
-		assoziationArbeitsplanVorgang(2,4);
-		assoziationArbeitsplanVorgang(2,5);
+		//Vorgaenge
+		Vorgang v1= erstelleVorgang(VorgangArtTyp.MONTAGE, 10, 15, 20);
+		Vorgang v2= erstelleVorgang(VorgangArtTyp.MONTAGE, 30, 30, 30);
+		Vorgang v3= erstelleVorgang(VorgangArtTyp.MONTAGE, 35, 40, 50);
+		Vorgang v4= erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 1, 2, 3);
+		Vorgang v5= erstelleVorgang(VorgangArtTyp.BEREITSTELLUNG, 4, 5, 6);
+		
+		List<Vorgang> vlist1= new ArrayList<Vorgang>();
+		vlist1.add(v1);
+		vlist1.add(v2);
+		vlist1.add(v3);
+		List<Vorgang> vlist2= new ArrayList<Vorgang>();
+		vlist2.add(v4);
+		vlist2.add(v5);
+		
+		//Arbeitsplaene
+		Arbeitsplan a1 = erstelleArbeitsplan(vlist1);
+		Arbeitsplan a2 = erstelleArbeitsplan(vlist2);
+		
+		//Bauteile
+		Bauteil b1 = erstelleBauteil("Maehdrescher",null,null);
+		Bauteil b2 = erstelleBauteil("Motor",null,null);
+		Bauteil b3 = erstelleBauteil("Reifen",null,null);
+		Bauteil b4 = erstelleBauteil("Schrauben",null,null);
+		
+		
+		//Stuecklistenpositionen
+		StuecklistenPosition sp1 = erstelleStuecklistenPosition(1,b2);
+		StuecklistenPosition sp2 = erstelleStuecklistenPosition(4,b3);
+		StuecklistenPosition sp3 = erstelleStuecklistenPosition(20,b4);
+		
+		Set<StuecklistenPosition> splist1= new HashSet<StuecklistenPosition>();
+		splist1.add(sp1);
+		splist1.add(sp2);
+
+		Set<StuecklistenPosition> splist2= new HashSet<StuecklistenPosition>();
+		splist2.add(sp3);
+		
+		//Stuecklisten
+		Stueckliste s1 = erstelleStueckliste("heute","morgen",splist1);
+		Stueckliste s2 = erstelleStueckliste("heute","morgen",splist2);
+		
+		//Arbeitsplaene und Stuecklisten fuer Bauteile setzen
+		b1.setStueckliste(s1);
+		b2.setStueckliste(s2);
+		b1.setArbeitsplan(a1);
+		b2.setArbeitsplan(a2);
+		
+		VorgangManager.saveVorgang(v1);
+		VorgangManager.saveVorgang(v2);
+		VorgangManager.saveVorgang(v3);
+		VorgangManager.saveVorgang(v4);
+		VorgangManager.saveVorgang(v5);
+		
+		ArbeitsplanManager.saveArbeitsplan(a1);
+		ArbeitsplanManager.saveArbeitsplan(a2);
+		
+		BauteilManager.saveBauteil(b1);
+		BauteilManager.saveBauteil(b2);
+		BauteilManager.saveBauteil(b3);
+		BauteilManager.saveBauteil(b4);
+		
+		StuecklistenPositionManager.saveStuecklistenPosition(sp1);
+		StuecklistenPositionManager.saveStuecklistenPosition(sp2);
+		StuecklistenPositionManager.saveStuecklistenPosition(sp3);
+		
+		StuecklisteManager.saveStueckliste(s1);
+		StuecklisteManager.saveStueckliste(s2);
+		
+		
+
 		FertigungService fs = new FertigungService();
     	fs.fertigungsPlanErstellen(new Long(1));
 

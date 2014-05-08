@@ -12,9 +12,18 @@ public class StuecklistenPosition {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr;
 	@ManyToOne
+	private Stueckliste stueckliste;
+	@ManyToOne
 	private Bauteil bauteil;
 	private Long menge;
 
+	public Stueckliste getStueckliste() {
+		return stueckliste;
+	}
+
+	public void setStueckliste(Stueckliste stueckliste) {
+		this.stueckliste = stueckliste;
+	}
 
 	public Bauteil getBauteil() {
 		return bauteil;
