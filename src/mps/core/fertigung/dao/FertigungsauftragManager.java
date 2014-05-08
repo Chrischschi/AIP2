@@ -1,6 +1,7 @@
 package mps.core.fertigung.dao;
 
 import org.hibernate.HibernateException;
+
 import mps.core.fertigung.Fertigungsauftrag;
 
 public class FertigungsauftragManager {
@@ -23,7 +24,7 @@ public class FertigungsauftragManager {
 	
 	public static Fertigungsauftrag loadFertigungsauftrag(Long id){
         try {
-            HibernateUtil.beginTransaction();
+        	HibernateUtil.beginTransaction();
             Fertigungsauftrag res = fertigungsauftragDAO.findByID(Fertigungsauftrag.class, id);
             HibernateUtil.commitTransaction();
             return res;

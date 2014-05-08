@@ -17,7 +17,6 @@
 <mapping class="mps.core.fertigung.Stueckliste"/>
 <mapping class="mps.core.fertigung.StuecklistenPosition"/>
 <mapping class="mps.core.fertigung.Vorgang"/>
-<mapping class="mps.core.fertigung.VorgangArtTyp"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Angebot"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Auftrag"/>
 

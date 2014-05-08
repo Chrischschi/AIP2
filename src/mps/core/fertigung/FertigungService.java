@@ -7,11 +7,10 @@ import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Set;
+
 
 import mps.core.fertigung.dao.BauteilManager;
 import mps.core.fertigung.dao.FertigungsauftragManager;
-
 
 public class FertigungService implements IFertigung {
 	public Long fertigungsPlanErstellen(Long auftragNr){
@@ -27,12 +26,11 @@ public class FertigungService implements IFertigung {
 		f.setBauteil(b);
 		long fid = FertigungsauftragManager.saveFertigungsauftrag(f);
 		
-		fertigungsplanDrucken(fid);
+		fertigungsplanDrucken(fid, f);
 		
 		return fid;
 	}
-	
-	private void fertigungsplanDrucken(Long fid){
+	private void fertigungsplanDrucken(Long fid, Fertigungsauftrag f){
 		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
 		String output = FertigungsauftragManager.loadFertigungsauftrag(fid).toString();

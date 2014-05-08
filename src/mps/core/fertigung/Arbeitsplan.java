@@ -3,13 +3,13 @@ package mps.core.fertigung;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Arbeitsplan {
@@ -17,7 +17,7 @@ public class Arbeitsplan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr;
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	private List<Vorgang> vorgangListe = new ArrayList<Vorgang>();
 
 	public List<Vorgang> getVorgangListe() {

@@ -12,11 +12,6 @@ import mps.core.fertigung.dao.StuecklisteManager;
 import mps.core.fertigung.dao.StuecklistenPositionManager;
 import mps.core.fertigung.dao.VorgangManager;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 
 public class FertigungRepository {
@@ -119,11 +114,6 @@ public class FertigungRepository {
 		Stueckliste s1 = erstelleStueckliste("heute","morgen",splist1);
 		Stueckliste s2 = erstelleStueckliste("heute","morgen",splist2);
 		
-		//Arbeitsplaene und Stuecklisten fuer Bauteile setzen
-		b1.setStueckliste(s1);
-		b2.setStueckliste(s2);
-		b1.setArbeitsplan(a1);
-		b2.setArbeitsplan(a2);
 		
 		VorgangManager.saveVorgang(v1);
 		VorgangManager.saveVorgang(v2);
@@ -145,6 +135,15 @@ public class FertigungRepository {
 		
 		StuecklisteManager.saveStueckliste(s1);
 		StuecklisteManager.saveStueckliste(s2);
+		
+		//Arbeitsplaene und Stuecklisten fuer Bauteile setzen
+		b1.setStueckliste(s1);
+		b2.setStueckliste(s2);
+		b1.setArbeitsplan(a1);
+		b2.setArbeitsplan(a2);
+		
+		BauteilManager.updateBauteil(b1);
+		BauteilManager.updateBauteil(b2);
 		
 		
 

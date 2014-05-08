@@ -3,8 +3,8 @@ package mps.core.fertigung;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +18,7 @@ public class Stueckliste {
 	private Long nr;
 	private String gueltigAb;
 	private String gueltigBis;
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 
 	

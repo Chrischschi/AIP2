@@ -18,6 +18,17 @@ public class BauteilManager {
         }
 	}
 	
+	public static void updateBauteil(Bauteil v){
+        try {
+            HibernateUtil.beginTransaction();
+            bauteilDAO.merge(v);
+            HibernateUtil.commitTransaction();
+        } catch (HibernateException ex) {
+            System.out.println("Bauteil konnte nicht gespeichert werden");
+            HibernateUtil.rollbackTransaction();
+        }
+	}
+	
 	public static Bauteil loadBauteil(Long id){
         try {
             HibernateUtil.beginTransaction();

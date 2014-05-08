@@ -2,12 +2,10 @@ package mps.core.fertigung.dao;
 
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.SessionFactory;
  
-@SuppressWarnings("deprecation")
 public class HibernateUtil {
  
 private static final SessionFactory sessionFactory;
