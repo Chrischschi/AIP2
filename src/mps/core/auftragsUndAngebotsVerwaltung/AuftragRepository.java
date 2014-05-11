@@ -8,10 +8,7 @@ public class AuftragRepository {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
-		Auftrag auftrag = (Auftrag) session
-				.createQuery("SELECT a FROM Auftrag a LEFT JOIN FETCH a.angebot WHERE a.nr = :aNr")
-				.setParameter("aNr", auftragNr)
-				.uniqueResult();
+		Auftrag auftrag = (Auftrag) session.get(Auftrag.class, auftragNr);
 		
 		session.getTransaction().commit();
 		
