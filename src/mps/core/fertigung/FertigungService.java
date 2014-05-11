@@ -8,19 +8,26 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-
+import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
 import mps.core.fertigung.dao.BauteilManager;
 import mps.core.fertigung.dao.FertigungsauftragManager;
 
 public class FertigungService implements IFertigung {
+	
+	private static final FertigungService INSTANCE = new FertigungService();
+	
+	private FertigungService() {}
+	
+	static FertigungService getInstance() {
+		return INSTANCE;
+	}
+	
 	public Long fertigungsPlanErstellen(Long auftragNr){
-		//TODO when Auftrag done
-		long bid = 1;
-		//long bid = IAuftraege.getAuftragService().getBauteilIdOfAutrag(auftragNr);
-		//IAuftraege a = FertigungRepository.read(IAuftraege.class,auftragNr);
+		long bid = IAuftraege.getAuftragService().getBauteilIdOfAutrag(auftragNr);
 		
+		//Reference on the true Auftraege Object even necessary?
+		//IAuftraege a = FertigungRepository.read(IAuftraege.class,auftragNr);
 		Fertigungsauftrag f = new Fertigungsauftrag();
-		//long fid = FertigungsauftragManager.
 		Bauteil b = BauteilManager.loadBauteil(bid);
 		f.setAuftrag(auftragNr);
 		f.setBauteil(b);
