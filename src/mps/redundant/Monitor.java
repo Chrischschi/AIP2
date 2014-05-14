@@ -35,7 +35,7 @@ public class Monitor implements IMonitor {
 
     @Override
     public void alive(String serverName) {
-        System.out.println("HeartBeat empfangen");
+        System.out.println("HeartBeat empfangen: " + serverName);
         if (aliveTimer.containsKey(serverName)) {
             aliveTimer.get(serverName).cancel();
             aliveTimer.remove(serverName);

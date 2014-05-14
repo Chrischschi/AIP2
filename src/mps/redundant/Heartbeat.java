@@ -18,7 +18,7 @@ public class Heartbeat extends Thread{
 
 
    public void run(){
-       while(!interrupted()){
+       while(!this.isInterrupted()){
            try {
                Registry monitorRegistry = LocateRegistry.getRegistry(Config.REGISTRY_HOST, Config.REGISTRY_PORT);
                IMonitor monitor = (IMonitor)monitorRegistry.lookup(Config.MONITOR_NAME);
@@ -28,6 +28,7 @@ public class Heartbeat extends Thread{
            } catch (RemoteException e) {
                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
            } catch (InterruptedException e) {
+        	   Thread.currentThread().interrupt();
                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
            } catch (NotBoundException e) {
                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
