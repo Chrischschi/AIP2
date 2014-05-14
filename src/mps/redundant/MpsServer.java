@@ -52,8 +52,31 @@ public class MpsServer extends Mps implements IMpsServer{
 //             System.setSecurityManager(new SecurityManager());
 //         }
 //         try {
-        MpsServer.create(Config.HAWMPS1_NAME);
+        MpsServer serverEins = MpsServer.create(Config.HAWMPS1_NAME);
         MpsServer.create(Config.HAWMPS2_NAME);
+        
+        // TEST CODE 
+        try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        serverEins.heartBeat.interrupt();
+        //END TEST CODE
+        
+        System.out.println("Cleaning up mps1");
+        serverEins = null;
+        System.gc();
+        try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        System.out.println("Restarting mps1");
+        serverEins = MpsServer.create(Config.HAWMPS1_NAME);
+        
 //         } catch (Exception e) {
 //             System.err.println("MpsServer exception:");
 //             e.printStackTrace();
