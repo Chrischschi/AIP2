@@ -13,18 +13,18 @@ import java.awt.event.ActionListener;
 
 
 public class MonitorGUI {
-    public JPanel monitorGUI = new JPanel();
-    private JLabel mps1_anfragen = new JLabel();
-    private JLabel mps2_anfragen = new JLabel();
-    private JPanel mps2_panel = new JPanel();
-    private JPanel mps1_panel = new JPanel();
-    private JToggleButton mps1_btn = new JToggleButton();
-    private JToggleButton mps2_btn = new JToggleButton();
-    private JLabel mps1_lab_time = new JLabel();
-    private JLabel mps2_lab_time = new JLabel();
-    private JLabel mps1_time = new JLabel();
-    private JLabel mps2_time = new JLabel();
-    private  JFrame jFrame;
+    public static JPanel monitorGUI = new JPanel();
+    private static JLabel mps1_anfragen = new JLabel();
+    private static JLabel mps2_anfragen = new JLabel();
+    private static JPanel mps2_panel = new JPanel();
+    private static JPanel mps1_panel = new JPanel();
+    private static JToggleButton mps1_btn = new JToggleButton();
+    private static JToggleButton mps2_btn = new JToggleButton();
+    private static JLabel mps1_lab_time = new JLabel();
+    private static JLabel mps2_lab_time = new JLabel();
+    private static JLabel mps1_time = new JLabel();
+    private static JLabel mps2_time = new JLabel();
+    private static JFrame jFrame;
     private static MonitorGUI instance;
     private Zustand zustand_mps1;
     private Zustand zustand_mps2;
@@ -78,6 +78,34 @@ public class MonitorGUI {
         changeZustandMPS1(Zustand.offline);
         mps1_timestamp = System.currentTimeMillis();
         mps2_timestamp = System.currentTimeMillis();
+        
+        monitorGUI.setLayout(null);
+        mps1_panel.setLayout(null);
+        mps2_panel.setLayout(null);
+        
+        mps1_panel.setBounds(0, 0, 1280, 360);
+        mps2_panel.setBounds(0,360,1280,360);
+        mps1_btn.setBounds(20, 20, 150, 20);
+        mps2_btn.setBounds(20, 20, 150, 20);
+        mps1_anfragen.setBounds(20, 40, 150, 20);
+        mps1_lab_time.setBounds(20, 60, 150, 20);
+        mps1_time.setBounds(20, 80, 150, 20);
+        mps2_anfragen.setBounds(20, 40, 150, 20);
+        mps2_lab_time.setBounds(20, 60, 150, 20);
+        mps2_time.setBounds(20, 80, 150, 20);
+        
+        mps1_btn.setText("Deaktiviert");
+        mps2_btn.setText("Deaktiviert");
+        
+   
+        
+        monitorGUI.add(mps1_panel);
+        monitorGUI.add(mps2_panel);
+        mps1_panel.add(mps1_btn);
+        mps2_panel.add(mps2_btn);
+        
+        frame.setSize(1280, 720);
+        frame.setVisible(true);
 
         new Thread(new Runnable() {
             @Override
@@ -197,7 +225,7 @@ public class MonitorGUI {
         frame.setContentPane(x.monitorGUI);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+       
     }
 
 }

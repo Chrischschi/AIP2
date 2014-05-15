@@ -132,6 +132,7 @@ public class Dispatcher implements IDispatcher{
         frame.setContentPane(x.monitorGUI);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
+        frame.setSize(1280, 720);
         frame.setVisible(true);
 
 
