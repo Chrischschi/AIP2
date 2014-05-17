@@ -6,4 +6,6 @@ import java.rmi.RemoteException;
 
 public interface IMonitor extends Remote {
     public void alive(String serverName) throws RemoteException, NotBoundException;
+
+	public void getMpsServerRegistry(String serverName, String host, int port) throws RemoteException;
 }

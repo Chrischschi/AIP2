@@ -5,8 +5,10 @@ import mps.redundant.MonitorGUI;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,8 +17,8 @@ import java.util.TimerTask;
 public class Monitor implements IMonitor {
     public Dispatcher dispatcher;
     public HashMap<String, Timer> aliveTimer;
-    public static final int timeOut = 10000;
-
+    public Registry hawmps1reg;
+    public Registry hawmps2reg;
 
     private Monitor(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
@@ -29,8 +31,15 @@ public class Monitor implements IMonitor {
 
         Registry heartBeatRegistry = dispatcher.serverRegistry;
         heartBeatRegistry.rebind(Config.MONITOR_NAME, stub); //treagt den Monitor unter dem namen in die Registry ein
-
+        System.out.println("Namen in Registry:"+ Arrays.toString(dispatcher.serverRegistry.list()));
         return monitor;
+    }
+    
+    public void getMpsServerRegistry(String serverName, String host, int port) throws RemoteException{
+    	if(serverName.equals("hawmps1")){
+    	hawmps1reg = LocateRegistry.getRegistry(host, port);}
+    	else{
+    	hawmps2reg = LocateRegistry.getRegistry(host, port);}
     }
 
     @Override
@@ -45,11 +54,15 @@ public class Monitor implements IMonitor {
 
 
         try {
-            dispatcher.alive((IMpsServer) dispatcher.serverRegistry.lookup(serverName));
+        	if(serverName.equals("hawmps1")){
+            dispatcher.alive((IMpsServer) hawmps1reg.lookup(serverName));}
+        	else{
+        		dispatcher.alive((IMpsServer) hawmps2reg.lookup(serverName));
+        	}
         } catch (RemoteException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (NotBoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            //e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
     }
 
@@ -74,7 +87,7 @@ public class Monitor implements IMonitor {
             public void run() {
                 monitor.notAlive(serverName);
             }
-        }, timeOut);
+        }, Config.MONITOR_SERVERTIMEOUT);
         return timer;
     }
 

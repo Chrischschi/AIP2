@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 
 
 public class Dispatcher implements IDispatcher{
-    public Registry serverRegistry;
+    public static Registry serverRegistry;
     public ArrayList<IMpsServer> serverList;
     public int roundRobinCounter = 0;
     public static Dispatcher dispatcher = null;
@@ -31,9 +31,9 @@ public class Dispatcher implements IDispatcher{
         if(dispatcher == null){
             dispatcher = new Dispatcher();
             IDispatcher stub = (IDispatcher) UnicastRemoteObject.exportObject(dispatcher, 0);
-
             Registry dispatcherRegistry = dispatcher.serverRegistry;
             dispatcherRegistry.rebind(Config.DISPATCHER_NAME, stub); //treagt den dispatcher unter dem namen in die Registry ein
+            System.out.println("Namen in Registry:"+ Arrays.toString(serverRegistry.list()));
         }
         return dispatcher;
     }
@@ -53,6 +53,7 @@ public class Dispatcher implements IDispatcher{
         IMpsServer server = null;
         try {
             server = getNextActiveServer();
+            System.out.println("Server: "+ server.getName() + " uebernimmt die Anfrage.");
             while (server == null) {
                 Thread.sleep(5000);
                 server = getNextActiveServer();
@@ -120,6 +121,8 @@ public class Dispatcher implements IDispatcher{
         }
         return false;
     }
+   
+
 
     
     public static void main(String[] args) throws RemoteException, InterruptedException, NotBoundException {
@@ -127,20 +130,23 @@ public class Dispatcher implements IDispatcher{
 //               System.setSecurityManager(new SecurityManager());
 //           }
 //           try {
-        JFrame frame = new JFrame("MonitorGUI");
-        MonitorGUI x = new MonitorGUI(frame);
-        frame.setContentPane(x.monitorGUI);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setSize(1280, 720);
-        frame.setVisible(true);
+    	if(args.length == 2){
+    		Config.REGISTRY_HOST = args[0];
+    		Config.REGISTRY_PORT = Integer.parseInt(args[1]);
+            JFrame frame = new JFrame("MonitorGUI");
+            MonitorGUI x = new MonitorGUI(frame);
+            frame.setContentPane(x.monitorGUI);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
+            frame.setVisible(true);
+
+            Dispatcher dispatcher = Dispatcher.create();
+            Monitor.create(dispatcher);
+    	}
+    	else System.err.println("please specify your ip adress and port as parameters");
 
 
-        Dispatcher dispatcher = Dispatcher.create();
-        Monitor.create(dispatcher);
 
-        //damit die mps server s1 und s2 eingetragen sind
-        Thread.sleep(1500);
 //           } catch (Exception e) {
 //               System.err.println("Dispatcher exception:");
 //               e.printStackTrace();

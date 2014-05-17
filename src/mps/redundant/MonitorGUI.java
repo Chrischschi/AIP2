@@ -13,17 +13,17 @@ import java.awt.event.ActionListener;
 
 
 public class MonitorGUI {
-    public static JPanel monitorGUI = new JPanel();
-    private static JLabel mps1_anfragen = new JLabel();
-    private static JLabel mps2_anfragen = new JLabel();
+    public  static JPanel monitorGUI = new JPanel();
+    private static JLabel mps1_anfragen = new JLabel("0");
+    private static JLabel mps2_anfragen = new JLabel("0");
     private static JPanel mps2_panel = new JPanel();
     private static JPanel mps1_panel = new JPanel();
     private static JToggleButton mps1_btn = new JToggleButton();
     private static JToggleButton mps2_btn = new JToggleButton();
-    private static JLabel mps1_lab_time = new JLabel();
-    private static JLabel mps2_lab_time = new JLabel();
-    private static JLabel mps1_time = new JLabel();
-    private static JLabel mps2_time = new JLabel();
+    private static JLabel mps1_lab_time = new JLabel("0");
+    private static JLabel mps2_lab_time = new JLabel("0");
+    private static JLabel mps1_time = new JLabel("0");
+    private static JLabel mps2_time = new JLabel("0");
     private static JFrame jFrame;
     private static MonitorGUI instance;
     private Zustand zustand_mps1;
@@ -34,8 +34,6 @@ public class MonitorGUI {
     public MonitorGUI(JFrame frame) {
         instance = this;
         jFrame = frame;
-        mps1_anfragen.setText("0");
-        mps2_anfragen.setText("0");
 
         mps1_btn.addActionListener(new ActionListener() {
             @Override
@@ -82,9 +80,10 @@ public class MonitorGUI {
         monitorGUI.setLayout(null);
         mps1_panel.setLayout(null);
         mps2_panel.setLayout(null);
+        frame.setSize(205,430);
         
-        mps1_panel.setBounds(0, 0, 1280, 360);
-        mps2_panel.setBounds(0,360,1280,360);
+        mps1_panel.setBounds(0, 0, 200, 200);
+        mps2_panel.setBounds(0,200,200,200);
         mps1_btn.setBounds(20, 20, 150, 20);
         mps2_btn.setBounds(20, 20, 150, 20);
         mps1_anfragen.setBounds(20, 40, 150, 20);
@@ -103,8 +102,13 @@ public class MonitorGUI {
         monitorGUI.add(mps2_panel);
         mps1_panel.add(mps1_btn);
         mps2_panel.add(mps2_btn);
+        mps1_panel.add(mps1_anfragen);
+        mps1_panel.add(mps1_lab_time);
+        mps1_panel.add(mps1_time);
+        mps2_panel.add(mps2_anfragen);
+        mps2_panel.add(mps2_lab_time);
+        mps2_panel.add(mps2_time);
         
-        frame.setSize(1280, 720);
         frame.setVisible(true);
 
         new Thread(new Runnable() {
@@ -136,7 +140,7 @@ public class MonitorGUI {
         TitledBorder border = null;
         switch (zustand) {
             case online:
-                border = ONLINE;;
+                border = ONLINE;
                 break;
             case offline:
                 border = OFFLINE;
@@ -155,12 +159,15 @@ public class MonitorGUI {
         switch (zustand) {
             case online:
                 setMPS1Running(mps1_timestamp);
+                mps1_btn.setText("Aktiviert");
                 break;
             case offline:
                 setMPS1Down(mps1_timestamp);
+                mps1_btn.setText("Deaktiviert");
                 break;
             case deaktiviert:
                 setMPS1Deactiv(mps1_timestamp);
+                mps1_btn.setText("Deaktiviert");
                 break;
         }
         changeZustandPanel(zustand, mps1_panel);
@@ -173,12 +180,15 @@ public class MonitorGUI {
         switch (zustand) {
             case online:
                 setMPS2Running(mps2_timestamp);
+                mps2_btn.setText("Aktiviert");
                 break;
             case offline:
                 setMPS2Down(mps2_timestamp);
+                mps2_btn.setText("Deaktiviert");
                 break;
             case deaktiviert:
                 setMPS2Deactiv(mps2_timestamp);
+                mps2_btn.setText("Deaktiviert");
                 break;
         }
         changeZustandPanel(zustand,mps2_panel);
@@ -224,8 +234,8 @@ public class MonitorGUI {
         MonitorGUI x = new MonitorGUI(frame);
         frame.setContentPane(x.monitorGUI);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-       
+        frame.setResizable(false);
+       System.out.println(mps1_anfragen.getText());
     }
 
 }

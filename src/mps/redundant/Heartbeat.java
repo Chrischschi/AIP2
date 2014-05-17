@@ -10,21 +10,24 @@ import mps.redundant.Config;
 
 public class Heartbeat extends Thread{
     private String serverName;
-    public static final int hearBeatInterval = 1000; //in Millisekunden
+    private String dispatcherHost;
+    private int dispatcherPort;
 
-    public Heartbeat(String serverName){
+    public Heartbeat(String serverName, String dispatcherHost, int dispatcherPort){
       this.serverName = serverName;
+      this.dispatcherHost = dispatcherHost;
+      this.dispatcherPort = dispatcherPort;
     }
 
 
    public void run(){
        while(!this.isInterrupted()){
            try {
-               Registry monitorRegistry = LocateRegistry.getRegistry(Config.REGISTRY_HOST, Config.REGISTRY_PORT);
+               Registry monitorRegistry = LocateRegistry.getRegistry(dispatcherHost, dispatcherPort);
                IMonitor monitor = (IMonitor)monitorRegistry.lookup(Config.MONITOR_NAME);
                monitor.alive(serverName);
                System.out.println("HeartBeat gesendet von "+ serverName);
-               sleep(hearBeatInterval);
+               sleep(Config.HEARTBEAT_INTERVALL);
            } catch (RemoteException e) {
                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
            } catch (InterruptedException e) {
