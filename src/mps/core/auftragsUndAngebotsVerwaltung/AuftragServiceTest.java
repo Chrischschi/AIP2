@@ -40,5 +40,17 @@ public class AuftragServiceTest {
 			
 		assertEquals("testGetBauteilIdOfAuftrag",expected,bauteilId);
 	}
+	
+	@Test
+	public void testAuftragErstellen1() {
+		AngebotService as = AngebotService.INSTANCE;
+		Angebot angebot = as.angebotErstellen(null, "17.5", "18.5", 1, 20L);
+		
+		AuftragService auftragService = AuftragService.getInstance();
+		Auftrag auftragMitAngebot = auftragService.auftragErstellen("16.5",angebot.getNr());
+		
+		//Check if the association has been made correctly 
+		assertEquals(angebot,auftragMitAngebot.getAngebot());
+	}
 
 }

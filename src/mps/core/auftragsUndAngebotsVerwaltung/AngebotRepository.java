@@ -25,4 +25,17 @@ public class AngebotRepository {
 		return a;
 	}
 
+	public static Angebot getByID(Long angebotNr) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		session.beginTransaction();
+		
+		Angebot result = (Angebot) session.get(Angebot.class, angebotNr);
+		
+		session.getTransaction().commit();
+		
+		return result;
+		
+	}
+
 }
