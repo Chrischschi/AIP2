@@ -39,4 +39,17 @@ public class AuftragRepository {
 		return auftrag;
 	}
 
+	/** Updates the persistent state of an Object in the Database
+	 * by merging the object
+	 * @param auftrag - the Persistent Object to be updated
+	 */
+	 static void persistUpdated(Auftrag auftrag) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		
+		session.merge(auftrag);
+		
+		session.getTransaction().commit(); 
+	}
+
 }

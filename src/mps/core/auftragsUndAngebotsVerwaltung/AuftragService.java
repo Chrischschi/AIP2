@@ -1,5 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import mps.core.fertigung.IFertigung;
+
 //TODO The whole class
 public final class AuftragService implements IAuftraege {
 	private static final AuftragService INSTANCE = new AuftragService();
@@ -19,6 +21,13 @@ public final class AuftragService implements IAuftraege {
 	public Auftrag auftragErstellen(String beauftragtAm,Long angebotNr) {
 		Angebot angebot = AngebotRepository.getByID(angebotNr);
 		Auftrag auftrag = AuftragRepository.createPersistent(false, beauftragtAm, angebot);
+		
+		
+		Long fertigungsPlanNr = IFertigung.getFertigungService().fertigungsPlanErstellen(auftrag.getNr());
+
+		auftrag.setFertigungsauftragNr(fertigungsPlanNr);
+		
+		AuftragRepository.persistUpdated(auftrag); 
 		
 		return auftrag;
 	}
