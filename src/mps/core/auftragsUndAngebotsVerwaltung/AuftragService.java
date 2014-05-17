@@ -16,8 +16,11 @@ public final class AuftragService implements IAuftraege {
 		return auftrag.getAngebot().getBauteilNr(); //Quick and dirty
 	}
 	
-	public Auftrag auftragErstellen(Long angebotNr) {
+	public Auftrag auftragErstellen(String beauftragtAm,Long angebotNr) {
+		Angebot angebot = AngebotRepository.getByID(angebotNr);
+		Auftrag auftrag = AuftragRepository.createPersistent(false, beauftragtAm, angebot);
 		
+		return auftrag;
 	}
 	 
 	 

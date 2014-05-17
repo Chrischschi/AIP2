@@ -1,6 +1,13 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
-public class AngebotService {
+//Enum singleton pattern
+public enum AngebotService {
+	
+	INSTANCE; //the instance
+	
+	public static AngebotService getInstance() {
+		return INSTANCE;
+	}
 	
 	//SystemOperation
 	public Angebot angebotErstellen(Long kundenNr,String gueltigAb, String gueltigBis, Integer preis , Long bauteilNr) {
