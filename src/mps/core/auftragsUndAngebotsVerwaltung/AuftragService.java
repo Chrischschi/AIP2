@@ -18,6 +18,7 @@ public final class AuftragService implements IAuftraege {
 		return auftrag.getAngebot().getBauteilNr(); //Quick and dirty
 	}
 	
+	@Override
 	public Auftrag auftragErstellen(String beauftragtAm,Long angebotNr) {
 		Angebot angebot = AngebotRepository.getByID(angebotNr);
 		Auftrag auftrag = AuftragRepository.createPersistent(false, beauftragtAm, angebot);

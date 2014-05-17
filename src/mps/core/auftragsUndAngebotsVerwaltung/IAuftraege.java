@@ -15,6 +15,9 @@ public interface IAuftraege {
 	 */
 	Long getBauteilIdOfAutrag(Long auftragNr); 
 	
+	//Neue methoden aus aufgabe 3
+	
+	
 	/** gibt eine referenz auf einen auftrag zurück,
 	 * diese referenz hat den typ E(xtern)Auftrag, damit
 	 * nicht implementierungsdetails aus der komponente raussickern 
@@ -26,4 +29,6 @@ public interface IAuftraege {
 	static IAuftraege getAuftragService() {
 		return AuftragService.getInstance();
 	}
+
+	EAuftrag auftragErstellen(String beauftragtAm, Long nr);
 }

@@ -38,7 +38,7 @@ public class FertigungService implements IFertigung {
 		return fid;
 	}
 	private void fertigungsplanDrucken(Long fid, Fertigungsauftrag f){
-		Path filePath = Paths.get("MPSFertigungsplan.txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
+		Path filePath = Paths.get("MPSFertigungsplan"+fid+".txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
 		String output = FertigungsauftragManager.loadFertigungsauftrag(fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
