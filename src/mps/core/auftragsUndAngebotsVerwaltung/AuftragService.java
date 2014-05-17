@@ -15,6 +15,10 @@ public final class AuftragService implements IAuftraege {
 		Auftrag auftrag = (Auftrag) AuftragRepository.readAuftrag(auftragNr);
 		return auftrag.getAngebot().getBauteilNr(); //Quick and dirty
 	}
+	
+	public Auftrag auftragErstellen(Long angebotNr) {
+		
+	}
 	 
 	 
 
