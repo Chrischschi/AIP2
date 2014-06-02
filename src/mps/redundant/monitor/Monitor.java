@@ -23,6 +23,7 @@ public class Monitor implements IMonitor {
 	public HashMap<String, Timer> aliveTimer;
 	public Registry hawmps1reg;
 	public Registry hawmps2reg;
+	private static Monitor monitor;
 
 	/**
 	 * @param dispatcher
@@ -47,7 +48,7 @@ public class Monitor implements IMonitor {
 	 *             die in der Config festgelegte Referenz gebunden.
 	 */
 	public static Monitor create(Dispatcher dispatcher) throws RemoteException {
-		Monitor monitor = new Monitor(dispatcher);
+		monitor = new Monitor(dispatcher);
 		IMonitor stub = (IMonitor) UnicastRemoteObject.exportObject(monitor, 0);
 		dispatcher.dispatcherRegistry.rebind(Config.MONITOR_NAME, stub);
 		return monitor;

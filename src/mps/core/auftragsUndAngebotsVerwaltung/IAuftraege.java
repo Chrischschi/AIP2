@@ -7,13 +7,6 @@ package mps.core.auftragsUndAngebotsVerwaltung;
 public interface IAuftraege {
 	/** Operationen, welche einem benoetigte daten besorgen */
 	
-	/**
-	 * Gibt einem fuer eine gegebene Auftrag-ID 
-	 * die ID des dazugehoerigen bauteils.
-	 * @param auftragNr ID des Auftrags 
-	 * @returns ID des bauteils
-	 */
-	Long getBauteilIdOfAutrag(Long auftragNr); 
 	
 	//Neue methoden aus aufgabe 3
 	

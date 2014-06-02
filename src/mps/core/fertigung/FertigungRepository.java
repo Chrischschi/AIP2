@@ -147,8 +147,6 @@ public class FertigungRepository {
 		
 		
 
-		//FertigungService fs = FertigungService.getInstance();
-    	//fs.fertigungsPlanErstellen(new Long(1));
 
 	}
 }

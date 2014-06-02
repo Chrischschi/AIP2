@@ -11,7 +11,7 @@ public class AngebotServiceTest {
 		@Test
 		public void testGetInstance() {
 			AngebotService serviceA = AngebotService.getInstance();
-			AngebotService serviceB = AngebotService.INSTANCE;
+			AngebotService serviceB = AngebotService.getInstance();
 			assertTrue("There is only one AuftragService",serviceA == serviceB);
 		}
 
@@ -25,7 +25,7 @@ public class AngebotServiceTest {
 	//Domain-specific tests 
 	@Test
 	public void testAngebotErstellen() {
-		AngebotService as = AngebotService.INSTANCE;
+		AngebotService as = AngebotService.getInstance();
 		Angebot a1 = as.angebotErstellen(null, "Gestern", "Morgen", 1147, 1L);
 		long a1Nr = a1.getNr();
 		

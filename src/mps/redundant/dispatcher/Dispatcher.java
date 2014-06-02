@@ -25,6 +25,7 @@ public class Dispatcher implements IDispatcher {
 	public HashMap<String, IMpsServer> serverList;
 	// Hilfsvariable fuer die Round Robin Aufgabenverteilung
 	public int roundRobinCounter = 0;
+	private static Dispatcher dispatcher;
 
 	/**
 	 * @param dispatcherPort
@@ -48,7 +49,7 @@ public class Dispatcher implements IDispatcher {
 	 *             die in der Config festgelegte Referenz gebunden.
 	 */
 	public static Dispatcher create(int dispatcherPort) throws RemoteException {
-		Dispatcher dispatcher = new Dispatcher(dispatcherPort);
+		dispatcher = new Dispatcher(dispatcherPort);
 		IDispatcher stub = (IDispatcher) UnicastRemoteObject.exportObject(
 				dispatcher, 0);
 		dispatcher.dispatcherRegistry.rebind(Config.DISPATCHER_NAME, stub);

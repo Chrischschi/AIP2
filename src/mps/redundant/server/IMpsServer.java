@@ -3,7 +3,7 @@ package mps.redundant.server;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-import mps.core.auftragsUndAngebotsVerwaltung.Angebot;
+import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 
 public interface IMpsServer extends Remote {
 	boolean isDeaktiviert() throws RemoteException;
@@ -12,9 +12,9 @@ public interface IMpsServer extends Remote {
 
 	String getName() throws RemoteException;
 
-	void createAuftrag(boolean b, String string, Angebot a)
+	void createAuftrag(boolean b, String string, EAngebot a)
 			throws RemoteException;
 
-	Angebot createAngebot(String string, String string2, int i, Long long1)
+	EAngebot createAngebot(String string, String string2, int i, Long long1)
 			throws RemoteException;
 }

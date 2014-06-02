@@ -1,7 +1,7 @@
 package mps.redundant.server;
 
-import mps.core.auftragsUndAngebotsVerwaltung.Angebot;
-import mps.core.auftragsUndAngebotsVerwaltung.AngebotService;
+import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
+import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
 
 /**
@@ -19,9 +19,9 @@ public class Mps {
 	 * 
 	 *         Erzeugt ein angebot welches in der Datenbank hinterlegt wird.
 	 */
-	public Angebot createAngebot(String gueltigAb, String gueltigBis,
+	public EAngebot createAngebot(String gueltigAb, String gueltigBis,
 			int preis, Long bauteilId) {
-		return AngebotService.getInstance().angebotErstellen(null, gueltigAb,
+		return IAngebote.getAngebotService().angebotErstellen(null, gueltigAb,
 				gueltigBis, preis, bauteilId);
 	}
 
@@ -35,7 +35,7 @@ public class Mps {
 	 *            Fertigungsplan zum Auftrag erzeugt.
 	 */
 	public void createAuftrag(boolean istAbgeschlossen, String beauftragtAm,
-			Angebot angebot) {
+			EAngebot angebot) {
 		IAuftraege.getAuftragService().auftragErstellen(beauftragtAm,
 				angebot.getNr());
 	}

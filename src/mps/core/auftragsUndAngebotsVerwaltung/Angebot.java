@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import java.io.Serializable;
 @Entity
-public class Angebot implements Serializable {
+public class Angebot implements EAngebot,Serializable {
 	
 	/**
 	 * 

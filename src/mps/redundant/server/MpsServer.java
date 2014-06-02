@@ -19,7 +19,7 @@ public class MpsServer extends Mps implements IMpsServer {
 	private Heartbeat heartBeat;
 	private boolean isDeaktiviert = false;
 	public Registry serverRegistry;
-
+	private static MpsServer mpsServer;
 	/**
 	 * @param serverName
 	 * @param heartBeat
@@ -63,7 +63,7 @@ public class MpsServer extends Mps implements IMpsServer {
 			throws RemoteException, NotBoundException {
 		Heartbeat heartBeat = new Heartbeat(serverName, dispatcherHost,
 				dispatcherPort);
-		MpsServer mpsServer = new MpsServer(serverName, heartBeat, ownPort);
+		mpsServer = new MpsServer(serverName, heartBeat, ownPort);
 
 		Registry dispatcherRegistry = LocateRegistry.getRegistry(
 				dispatcherHost, dispatcherPort);

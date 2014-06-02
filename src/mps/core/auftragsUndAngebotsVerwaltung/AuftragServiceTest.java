@@ -21,29 +21,10 @@ public class AuftragServiceTest {
 		assertEquals("Only reference equality needed because the class is a singleton",serviceA,serviceB);
 	}
 	
-	//Domain-Specific Tests
-	@Test
-	public void testGetBauteilIdOfAutrag() {
-		/* Angenommen, wir haben das angebot, das mit dem 
-		 * bauteil mit der ID 1 assoziiert ist 
-		 * (dieses bauteil hat den namen "Kolben") 
-		 * */ 
-		Angebot angebot = AngebotRepository.createPersistent("23.04.2014","24.04.2014",40,1L);
-		//erstelle auftrag und assoziiere mit angebot
-		Auftrag auftragZuAngebot = AuftragRepository.createPersistent(false,"23.04.2014",angebot);
-		
-		AuftragService as = AuftragService.getInstance();
-		
-		Long bauteilId = as.getBauteilIdOfAutrag(auftragZuAngebot.getNr());
-		
-		Long expected = angebot.getBauteilNr();
-			
-		assertEquals("testGetBauteilIdOfAuftrag",expected,bauteilId);
-	}
 	
 	@Test
 	public void testAuftragErstellen1() {
-		AngebotService as = AngebotService.INSTANCE;
+		AngebotService as = AngebotService.getInstance();
 		Angebot angebot = as.angebotErstellen(null, "17.5", "18.5", 1, 20L);
 		
 		AuftragService auftragService = AuftragService.getInstance();

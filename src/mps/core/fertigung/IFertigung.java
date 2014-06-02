@@ -21,7 +21,7 @@ public interface IFertigung {
 	 * Alternativ wird hier nur eine textuelle Form der im Datenmodell 
 	 * der Komponente "Fertigung" hinterlegte Daten ausgegeben.  
 	 */
-	Long fertigungsPlanErstellen(Long auftragNr);
+	Long fertigungsPlanErstellen(Long auftragNr, Long bauteilNr);
 	
 	
 	static IFertigung getFertigungService() {

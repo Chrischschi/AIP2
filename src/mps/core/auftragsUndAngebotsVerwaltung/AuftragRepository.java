@@ -1,5 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import mps.core.fertigung.IFertigung;
+
 import org.hibernate.Session;
 
 public class AuftragRepository {
@@ -15,6 +17,7 @@ public class AuftragRepository {
 		return auftrag;
 	}
 
+	 
 	public static Auftrag createPersistent(boolean istAbgeschlossen, String beauftragtAm ,
 			Angebot angebot) {
 		//Create transient object
@@ -30,9 +33,16 @@ public class AuftragRepository {
 		angebot.setAuftrag(auftrag);
 		
 		//Update the newly created object
-		session.save(auftrag);
+		long aid=(long)session.save(auftrag);
 		//Update the already existing object
 		session.merge(angebot);
+		
+		auftrag= (Auftrag) session.get(Auftrag.class, aid);
+		
+		Long fertigungsPlanNr = IFertigung.getFertigungService().fertigungsPlanErstellen(auftrag.getNr(),auftrag.getAngebot().getBauteilNr());
+
+		auftrag.setFertigungsauftragNr(fertigungsPlanNr);
+		session.merge(auftrag);
 		
 		session.getTransaction().commit();
 		

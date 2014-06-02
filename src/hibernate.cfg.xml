@@ -19,6 +19,7 @@
 <mapping class="mps.core.fertigung.Vorgang"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Angebot"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Auftrag"/>
+<mapping class="mps.core.auftragsUndAngebotsVerwaltung.Kunde"/>
 
 </session-factory>
 </hibernate-configuration>

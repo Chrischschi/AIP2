@@ -1,11 +1,13 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 //Enum singleton pattern
-public enum AngebotService {
+public final class AngebotService implements IAngebote{
 	
-	INSTANCE; //the instance
+	private static final AngebotService INSTANCE = new AngebotService();
 	
-	public static AngebotService getInstance() {
+	private AngebotService() {}
+	
+	static AngebotService getInstance() {
 		return INSTANCE;
 	}
 	
