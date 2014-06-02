@@ -25,13 +25,16 @@ public class Angebot implements EAngebot,Serializable {
 	//Komponenten-intern
 	@OneToOne
 	private Auftrag auftrag;
+	@OneToOne
+	private Kunde kunde;
 	//Komponenten-extern
 	private Long bauteilNr;
 	//referenz zu Kunde fehlt erstmal absichtlich
 	
 	/** Factory Method */
-	public static Angebot create(String gueltigAb,String gueltigBis,Integer preis) {
+	public static Angebot create(Kunde kunde, String gueltigAb,String gueltigBis,Integer preis) {
 		Angebot instanceToCreate = new Angebot();
+		instanceToCreate.setKunde(kunde);
 		instanceToCreate.setGueltigAb(gueltigAb);
 		instanceToCreate.setGueltigBis(gueltigBis);
 		instanceToCreate.setPreis(preis);
@@ -87,6 +90,20 @@ public class Angebot implements EAngebot,Serializable {
 	public void setPreis(Integer preis) {
 		this.preis = preis;
 	}
+	
+	/**
+	 * @return the client
+	 */
+	public Kunde getKunde() {
+		return kunde;
+	}
+	/**
+	 * @param the client to set
+	 */
+	public void setKunde(Kunde kunde) {
+		this.kunde = kunde;
+	}
+	
 	/**
 	 * @return the bauteilNr
 	 */

@@ -1,6 +1,8 @@
 package mps.redundant.server;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
+import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
+import mps.core.auftragsUndAngebotsVerwaltung.IKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
 
@@ -11,6 +13,17 @@ import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
 public class Mps {
 
 	/**
+	 * @param name
+	 * @param adresse
+	 * @return
+	 * 
+	 *         Erzeugt einen Kunden welcher in der Datenbank hinterlegt wird.
+	 */
+	public EKunde createKunde(String name, String adresse) {
+		return IKunde.getKundeService().kundeErstellen(name,adresse);
+	}
+	
+	/**
 	 * @param gueltigAb
 	 * @param gueltigBis
 	 * @param preis
@@ -19,9 +32,9 @@ public class Mps {
 	 * 
 	 *         Erzeugt ein angebot welches in der Datenbank hinterlegt wird.
 	 */
-	public EAngebot createAngebot(String gueltigAb, String gueltigBis,
+	public EAngebot createAngebot(EKunde kunde, String gueltigAb, String gueltigBis,
 			int preis, Long bauteilId) {
-		return IAngebote.getAngebotService().angebotErstellen(null, gueltigAb,
+		return IAngebote.getAngebotService().angebotErstellen(kunde.getNr(), gueltigAb,
 				gueltigBis, preis, bauteilId);
 	}
 

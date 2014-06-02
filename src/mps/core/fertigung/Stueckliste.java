@@ -21,7 +21,13 @@ public class Stueckliste {
 	@OneToMany(fetch=FetchType.EAGER)
 	private Set<StuecklistenPosition> stuecklistenPosition = new HashSet<StuecklistenPosition>();
 
-	
+	public static Stueckliste erstelleStueckliste(String gueltigAb,String gueltigBis,Set<StuecklistenPosition> stuecklistenposition){
+		Stueckliste s = new Stueckliste();
+		s.setGueltigAb(gueltigAb);
+		s.setGueltigBis(gueltigBis);
+		s.setStuecklistenPosition(stuecklistenposition);
+		return s;
+	}
 
 	public String getGueltigAb() {
 		return gueltigAb;

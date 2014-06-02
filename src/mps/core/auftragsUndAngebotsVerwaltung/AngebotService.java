@@ -12,8 +12,9 @@ public final class AngebotService implements IAngebote{
 	}
 	
 	//SystemOperation
-	public Angebot angebotErstellen(Long kundenNr,String gueltigAb, String gueltigBis, Integer preis , Long bauteilNr) {
-		return AngebotRepository.createPersistent(gueltigAb, gueltigBis, preis, bauteilNr);
+	public Angebot angebotErstellen(Long kundeNr,String gueltigAb, String gueltigBis, Integer preis , Long bauteilNr) {
+		Kunde kunde = KundeRepository.getByID(kundeNr);
+		return AngebotRepository.createPersistent(kunde,gueltigAb, gueltigBis, preis, bauteilNr);
 	}
 	
 	

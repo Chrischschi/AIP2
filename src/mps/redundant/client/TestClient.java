@@ -1,6 +1,7 @@
 package mps.redundant.client;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
+import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.redundant.Config;
 import mps.redundant.dispatcher.IDispatcher;
 
@@ -25,14 +26,17 @@ public class TestClient {
 			IDispatcher remoteDispatcher = getDispatcher(args[0],
 					Integer.parseInt(args[1]));
 
+			EKunde k = remoteDispatcher.getRemoteServerInstance().createKunde("SAP", "Holunderstrasse 25");
+			EKunde k2 = remoteDispatcher.getRemoteServerInstance().createKunde("Siemens", "Petersallee 10");
+			
 			EAngebot a = remoteDispatcher.getRemoteServerInstance()
-					.createAngebot("10.05.2014", "17.05.2014", 50, new Long(1));
+					.createAngebot(k,"10.05.2014", "17.05.2014", 50, new Long(1));
 			EAngebot a2 = remoteDispatcher.getRemoteServerInstance()
-					.createAngebot("10.05.2014", "17.05.2014", 50, new Long(1));
+					.createAngebot(k2,"10.05.2014", "17.05.2014", 50, new Long(1));
 			EAngebot a3 = remoteDispatcher.getRemoteServerInstance()
-					.createAngebot("10.05.2014", "17.05.2014", 50, new Long(2));
+					.createAngebot(k2,"10.05.2014", "17.05.2014", 50, new Long(2));
 
-			remoteDispatcher.getRemoteServerInstance().createAngebot(
+			remoteDispatcher.getRemoteServerInstance().createAngebot(k2,
 					"10.05.2014", "17.05.2014", 50, new Long(3));
 			remoteDispatcher.getRemoteServerInstance().createAuftrag(false,
 					"17.05.2014", a);

@@ -1,13 +1,19 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Kunde{
+public class Kunde implements EKunde,Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/** Attribute */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

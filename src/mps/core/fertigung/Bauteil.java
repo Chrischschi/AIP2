@@ -28,6 +28,14 @@ public class Bauteil {
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
 	@ElementCollection
 	private Set<Integer> angebotsListe = new HashSet<Integer>();
+	
+	public static Bauteil erstelleBauteil(String name, Stueckliste stueckliste, Arbeitsplan arbeitsplan){
+		Bauteil b = new Bauteil();
+		b.setName(name);
+		b.setStueckliste(stueckliste);
+		b.setArbeitsplan(arbeitsplan);
+		return b;
+		}
 
 	public Long getNr() {
 		return nr;

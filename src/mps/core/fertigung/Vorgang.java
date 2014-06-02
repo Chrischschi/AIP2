@@ -18,6 +18,15 @@ public class Vorgang {
 	@Enumerated(EnumType.STRING)
 	private VorgangArtTyp vorgangArtTyp;
 
+	public static Vorgang erstelleVorgang(VorgangArtTyp typ, long ruestzeit, long maschinenzeit, long personenzeit){
+		Vorgang v = new Vorgang();
+		v.setVorgangArtTyp(typ);
+		v.setRuestzeit(ruestzeit);
+		v.setMaschinenzeit(maschinenzeit);
+		v.setPersonenzeit(personenzeit);
+		return v;
+	}
+	
 	public Long getRuestzeit() {
 		return ruestzeit;
 	}

@@ -15,6 +15,12 @@ public class StuecklistenPosition {
 	private Bauteil bauteil;
 	private Long menge;
 
+	public static StuecklistenPosition erstelleStuecklistenPosition(long menge, Bauteil bauteil){
+		StuecklistenPosition sp = new StuecklistenPosition();
+		sp.setMenge(menge);
+		sp.setBauteil(bauteil);
+		return sp;
+	}
 
 	public Bauteil getBauteil() {
 		return bauteil;

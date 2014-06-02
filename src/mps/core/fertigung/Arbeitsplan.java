@@ -20,6 +20,12 @@ public class Arbeitsplan {
 	@OneToMany(fetch=FetchType.EAGER)
 	private List<Vorgang> vorgangListe = new ArrayList<Vorgang>();
 
+	public static Arbeitsplan erstelleArbeitsplan(List<Vorgang> vorgaenge){
+		Arbeitsplan a = new Arbeitsplan();
+		a.setVorgangListe(vorgaenge);
+		return a;
+	}
+	
 	public List<Vorgang> getVorgangListe() {
 		return vorgangListe;
 	}

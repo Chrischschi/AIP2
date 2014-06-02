@@ -4,6 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
+import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 
 public interface IMpsServer extends Remote {
 	boolean isDeaktiviert() throws RemoteException;
@@ -15,6 +16,8 @@ public interface IMpsServer extends Remote {
 	void createAuftrag(boolean b, String string, EAngebot a)
 			throws RemoteException;
 
-	EAngebot createAngebot(String string, String string2, int i, Long long1)
+	EAngebot createAngebot(EKunde kunde, String string, String string2, int i, Long long1)
+			throws RemoteException;
+	EKunde createKunde(String name,String adresse)
 			throws RemoteException;
 }

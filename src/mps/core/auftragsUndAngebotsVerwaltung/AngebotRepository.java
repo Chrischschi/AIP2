@@ -4,10 +4,12 @@ import org.hibernate.Session;
 
 public class AngebotRepository {
 
-	public static Angebot createPersistent(String gueltigAb,String gueltigBis,
+	public static Angebot createPersistent(Kunde kunde, String gueltigAb,String gueltigBis,
 			Integer preis, Long bauteilId) {
+		
+		
 		//Create Transient object
-		Angebot a = Angebot.create(gueltigAb,gueltigBis,preis);
+		Angebot a = Angebot.create(kunde, gueltigAb,gueltigBis,preis);
 		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		//Begin Persistence Context
