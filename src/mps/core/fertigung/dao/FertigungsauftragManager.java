@@ -3,6 +3,7 @@ package mps.core.fertigung.dao;
 import org.hibernate.HibernateException;
 
 import mps.core.fertigung.Fertigungsauftrag;
+import mps.core.fertigung.dao.HibernateUtil;
 
 public class FertigungsauftragManager {
 

@@ -1,5 +1,6 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+
 //TODO The whole class
 public final class AuftragService implements IAuftraege {
 	private static final AuftragService INSTANCE = new AuftragService();

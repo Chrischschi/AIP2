@@ -3,7 +3,6 @@ package mps.core.fertigung;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,8 +25,6 @@ public class Bauteil {
 	private Stueckliste stueckliste;
 	@OneToMany
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
-	@ElementCollection
-	private Set<Integer> angebotsListe = new HashSet<Integer>();
 	
 	public static Bauteil erstelleBauteil(String name, Stueckliste stueckliste, Arbeitsplan arbeitsplan){
 		Bauteil b = new Bauteil();
@@ -80,13 +77,6 @@ public class Bauteil {
 		return "Bauteil Nr: "+nr+" Name: "+ name;
 	}
 	
-	public Set<Integer> getAngebotsListe() {
-		return angebotsListe;
-	}
-
-	public void setAngebotsListe(HashSet<Integer> angebotsListe) {
-		this.angebotsListe = angebotsListe;
-	}
 
 	@Override
 	public boolean equals(Object o){

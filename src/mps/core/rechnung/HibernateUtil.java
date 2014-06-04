@@ -1,4 +1,4 @@
-package mps.core.auftragsUndAngebotsVerwaltung;
+package mps.core.rechnung;
 
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

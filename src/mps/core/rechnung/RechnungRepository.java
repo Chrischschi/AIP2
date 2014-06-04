@@ -1,30 +1,34 @@
-package mps.core.auftragsUndAngebotsVerwaltung;
+package mps.core.rechnung;
+
 
 import org.hibernate.Session;
-import mps.core.auftragsUndAngebotsVerwaltung.HibernateUtil;
 
-public class KundeRepository {
+import mps.core.rechnung.HibernateUtil;
 
-	public static Kunde createPersistent(String name, String adresse) {
+public class RechnungRepository {
+
+	public static Long createPersistent(int betrag, Long auftragNr) {
+		
+		
 		//Create Transient object
-		Kunde a = Kunde.create(name,adresse);
+		Rechnung r = Rechnung.create(betrag, auftragNr);
 		
 		//Begin Persistence Context
 		Session session = HibernateUtil.beginTransaction();
 		
+		
 		//Persist the object
-		session.save(a);
+		Long rechnungNr = (Long) session.save(r);
 		
 		//Commit the changes and end the persistence context (implicitly)
 		HibernateUtil.commitTransaction();
 		
-		return a;
+		return rechnungNr;
 	}
 
-	public static Kunde getByID(Long kundenNr) {
+	public static Rechnung getByID(Long rechnungNr) {
 		Session session = HibernateUtil.beginTransaction();
-		
-		Kunde result = (Kunde) session.get(Kunde.class, kundenNr);
+		Rechnung result = (Rechnung) session.get(Rechnung.class, rechnungNr);
 		
 		HibernateUtil.commitTransaction();
 		

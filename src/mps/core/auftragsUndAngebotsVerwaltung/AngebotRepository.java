@@ -1,6 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 import org.hibernate.Session;
+import mps.core.auftragsUndAngebotsVerwaltung.HibernateUtil;
 
 public class AngebotRepository {
 
@@ -11,9 +12,8 @@ public class AngebotRepository {
 		//Create Transient object
 		Angebot a = Angebot.create(kunde, gueltigAb,gueltigBis,preis);
 		
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		//Begin Persistence Context
-		session.beginTransaction(); 
+		Session session = HibernateUtil.beginTransaction();
 		
 		//set references
 		a.setBauteilNr(bauteilId);
@@ -22,19 +22,17 @@ public class AngebotRepository {
 		session.save(a);
 		
 		//Commit the changes and end the persistence context (implicitly)
-		session.getTransaction().commit();
+		HibernateUtil.commitTransaction();
 		
 		return a;
 	}
 
 	public static Angebot getByID(Long angebotNr) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		
-		session.beginTransaction();
+		Session session = HibernateUtil.beginTransaction();
 		
 		Angebot result = (Angebot) session.get(Angebot.class, angebotNr);
 		
-		session.getTransaction().commit();
+		HibernateUtil.commitTransaction();
 		
 		return result;
 		

@@ -1,9 +1,9 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 import static org.junit.Assert.*;
-
 import org.hibernate.Session;
 import org.junit.Test;
+import mps.core.auftragsUndAngebotsVerwaltung.HibernateUtil;
 
 public class AngebotServiceTest {
 	

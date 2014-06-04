@@ -1,7 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 //Enum singleton pattern
-public final class KundeService implements IKunde{
+public final class KundeService implements IKunden{
 	
 	private static final KundeService INSTANCE = new KundeService();
 	

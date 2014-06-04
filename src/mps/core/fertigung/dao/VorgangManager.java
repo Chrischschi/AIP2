@@ -2,6 +2,7 @@ package mps.core.fertigung.dao;
 
 import org.hibernate.HibernateException;
 import mps.core.fertigung.Vorgang;
+import mps.core.fertigung.dao.HibernateUtil;
 
 public class VorgangManager {
 

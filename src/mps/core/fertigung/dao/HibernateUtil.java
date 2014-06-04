@@ -31,7 +31,9 @@ return sessionFactory;
  
 public static Session beginTransaction() {
 Session hibernateSession = HibernateUtil.getSession();
+if(!hibernateSession.getTransaction().isActive()){
 hibernateSession.beginTransaction();
+}
 return hibernateSession;
 }
  

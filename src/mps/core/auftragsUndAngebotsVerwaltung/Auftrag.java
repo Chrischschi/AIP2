@@ -20,7 +20,8 @@ public class Auftrag implements EAuftrag {
 	/** Referenzen */
 	@OneToOne(fetch=FetchType.EAGER)
 	private Angebot angebot = null;
-	private Long fertigungsauftragNr; 
+	private Long fertigungsauftragNr;
+	private Long rechnungNr; 
 
 	@Override
 	public Long getNr() {
@@ -75,6 +76,15 @@ public class Auftrag implements EAuftrag {
 		this.angebot = angebot;
 	}
 	
+	public Long getRechnungNr(){
+		return rechnungNr;
+	}
+	
+	public void setRechnungNr(Long rechnungNr) {
+		this.rechnungNr = rechnungNr;
+		
+	}
+	
 	@Override 
 	/** use business-key equality for implementing equals */
 	public boolean equals(Object o) {
@@ -92,5 +102,7 @@ public class Auftrag implements EAuftrag {
 		
 		return auftrag;
 	}
+
+
 
 }

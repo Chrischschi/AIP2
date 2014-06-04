@@ -2,6 +2,7 @@ package mps.core.fertigung.dao;
 
 import org.hibernate.HibernateException;
 
+import mps.core.fertigung.dao.HibernateUtil;
 import mps.core.fertigung.Arbeitsplan;
 
 public class ArbeitsplanManager {

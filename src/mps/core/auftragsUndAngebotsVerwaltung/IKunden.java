@@ -1,8 +1,8 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
-public interface IKunde {
+public interface IKunden {
 	
-	static IKunde getKundeService() {
+	static IKunden getKundeService() {
 		return KundeService.getInstance();
 	}
 
