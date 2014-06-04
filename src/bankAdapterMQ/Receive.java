@@ -21,11 +21,22 @@ public class Receive {
     
     QueueingConsumer consumer = new QueueingConsumer(channel);
     channel.basicConsume(QUEUE_NAME, true, consumer);
+    Long rechnungsnummer = 0L;
+    int betrag= 0; 
     
     while (true) {
       QueueingConsumer.Delivery delivery = consumer.nextDelivery();
       String message = new String(delivery.getBody());
-      System.out.println(" [x] Received '" + message + "'");
+      if(message.matches("^[0-9]{1,20} [0-9]{1,20}$")){
+    	  String[] s = message.split(" ");
+    	  rechnungsnummer = Long.valueOf(s[0]);
+    	  betrag = Integer.valueOf(s[1]);
+    	  System.out.println(" [x] Received '" + "Rechnungsnummer: " + rechnungsnummer + " Betrag: "+ betrag+ "'");
+      }else{
+    	  System.out.println("Fehlerhafter Input");
+    	  //TODO was tun wenn input nicht matched?
+      }
+     
     }
   }
 }
