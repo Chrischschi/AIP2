@@ -1,9 +1,9 @@
-package mps.core.rechnung;
+package mps.core.buchhaltung;
 
 
 import org.hibernate.Session;
 
-import mps.core.rechnung.HibernateUtil;
+import mps.core.buchhaltung.HibernateUtil;
 
 public class RechnungRepository {
 

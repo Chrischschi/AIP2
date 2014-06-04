@@ -1,4 +1,4 @@
-package mps.core.rechnung;
+package mps.core.buchhaltung;
 
 import org.hibernate.Session;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

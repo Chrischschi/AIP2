@@ -1,8 +1,8 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
 import mps.core.fertigung.IFertigung;
-import mps.core.rechnung.IRechnungen;
 import mps.core.auftragsUndAngebotsVerwaltung.HibernateUtil;
+import mps.core.buchhaltung.IRechnungen;
 
 import org.hibernate.Session;
 

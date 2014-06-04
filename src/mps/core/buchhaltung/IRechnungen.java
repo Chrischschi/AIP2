@@ -1,4 +1,4 @@
-package mps.core.rechnung;
+package mps.core.buchhaltung;
 
 
 public interface IRechnungen {

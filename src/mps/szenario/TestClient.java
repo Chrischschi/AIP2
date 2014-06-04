@@ -1,4 +1,4 @@
-package mps.redundant.client;
+package mps.szenario;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
