@@ -5,6 +5,7 @@ import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IKunden;
 import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
+import mps.core.buchhaltung.IRechnungen;
 
 /**
  * MPS ist sozusagen die Fassade, welche die bisherige "Buisness Logik"
@@ -51,6 +52,10 @@ public class Mps {
 			EAngebot angebot) {
 		IAuftraege.getAuftragService().auftragErstellen(beauftragtAm,
 				angebot.getNr());
+	}
+	
+	public void zahlungsEingang(int zahlung,Long rechnungsnummer){
+		IRechnungen.getRechnungService().zahlungsEingang(zahlung, rechnungsnummer);
 	}
 
 }

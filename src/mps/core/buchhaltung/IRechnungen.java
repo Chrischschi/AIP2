@@ -7,4 +7,6 @@ public interface IRechnungen {
 	}
 
 	Long rechnungErstellen(int betrag, Long auftragNr);
+	
+	void zahlungsEingang(int zahlung, Long rechnungsnummer);
 }

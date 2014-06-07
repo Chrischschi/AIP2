@@ -20,7 +20,7 @@
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Angebot"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Auftrag"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Kunde"/>
-<mapping class="mps.core.rechnung.Rechnung"/>
+<mapping class="mps.core.buchhaltung.Rechnung"/>
 
 </session-factory>
 </hibernate-configuration>

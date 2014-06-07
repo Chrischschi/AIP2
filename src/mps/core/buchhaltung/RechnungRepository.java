@@ -35,5 +35,13 @@ public class RechnungRepository {
 		return result;
 		
 	}
+	
+	public static void zahlungsEingang(int zahlung, Long rechnungsnummer) {
+		Session session = HibernateUtil.beginTransaction();
+		Rechnung result = (Rechnung) session.get(Rechnung.class, rechnungsnummer);
+		result.zahlungsEingang(zahlung);
+		HibernateUtil.commitTransaction();
+		
+	}
 
 }

@@ -19,6 +19,10 @@ public final class RechnungService implements IRechnungen {
 		
 		return rechnungNr;
 	}
+	
+	public void zahlungsEingang(int zahlung, Long rechnungsnummer){
+		RechnungRepository.zahlungsEingang(zahlung, rechnungsnummer);
+	}
 	 
 	 
 

@@ -20,4 +20,5 @@ public interface IMpsServer extends Remote {
 			throws RemoteException;
 	EKunde createKunde(String name,String adresse)
 			throws RemoteException;
+	void zahlungsEingang(int zahlung, Long rechnungsnummer)throws RemoteException;
 }
