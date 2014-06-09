@@ -40,6 +40,7 @@ public class RechnungRepository {
 		Session session = HibernateUtil.beginTransaction();
 		Rechnung result = (Rechnung) session.get(Rechnung.class, rechnungsnummer);
 		result.zahlungsEingang(zahlung);
+		session.merge(result); //TODO: bitte zeile inspizieren
 		HibernateUtil.commitTransaction();
 		
 	}
