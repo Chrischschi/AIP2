@@ -3,9 +3,12 @@ package mps.szenario;
 import mps.core.auftragsUndAngebotsVerwaltung.Adresse;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
+import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
+import mps.core.auftragsUndAngebotsVerwaltung.KundeRepository;
 import mps.redundant.Config;
 import mps.redundant.dispatcher.IDispatcher;
 
+import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -45,6 +48,17 @@ public class TestClient {
 					"17.05.2014", a2);
 			remoteDispatcher.getRemoteServerInstance().createAuftrag(false,
 					"17.05.2014", a3);
+			
+			System.out.println("Press any key to send a Transport request to the UPPS web service");
+			try {
+				System.in.read();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			Kunde k_1 = KundeRepository.getByID(1);
+			remoteDispatcher.getRemoteServerInstance().sendeTransportAuftrag(k_1,null);
 		} else
 			System.err
 					.println("please specify the ip adress and port of the server on which the dispatcher is running");

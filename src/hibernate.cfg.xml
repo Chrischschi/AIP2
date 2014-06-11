@@ -10,7 +10,7 @@
 <property name="show_sql">true</property>
 <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 <property name="hibernate.current_session_context_class">thread</property>
-<property name="hbm2ddl.auto">update</property>
+<property name="hbm2ddl.auto">create</property>
 <mapping class="mps.core.fertigung.Bauteil"/>
 <mapping class="mps.core.fertigung.Arbeitsplan"/>
 <mapping class="mps.core.fertigung.Fertigungsauftrag"/>
@@ -21,6 +21,7 @@
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Auftrag"/>
 <mapping class="mps.core.auftragsUndAngebotsVerwaltung.Kunde"/>
 <mapping class="mps.core.buchhaltung.Rechnung"/>
+<mapping class="mps.core.auftragsUndAngebotsVerwaltung.Adresse"/>
 
 </session-factory>
 </hibernate-configuration>

@@ -1,6 +1,16 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Adresse {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 	
 	private String name;
 	private int nummer; 
@@ -29,6 +39,14 @@ public class Adresse {
 	}
 	public void setPlz(String plz) {
 		this.plz = plz;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

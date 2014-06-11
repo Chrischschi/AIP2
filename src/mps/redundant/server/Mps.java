@@ -1,12 +1,18 @@
 package mps.redundant.server;
 
+
+import extern.uppsTransportService.model.TransportRequestData;
+import transportDienstAdapterREST.RESTConnector;
+import transportDienstAdapterREST.Util;
 import mps.core.auftragsUndAngebotsVerwaltung.Adresse;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IKunden;
 import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
+import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
 import mps.core.buchhaltung.IRechnungen;
+import mps.core.fertigung.Bauteil;
 
 /**
  * MPS ist sozusagen die Fassade, welche die bisherige "Buisness Logik"
@@ -57,6 +63,13 @@ public class Mps {
 	
 	public void zahlungsEingang(int zahlung,Long rechnungsnummer){
 		IRechnungen.getRechnungService().zahlungsEingang(zahlung, rechnungsnummer);
+	}
+	
+	public long sendeTransportAuftrag(Kunde kunde, Bauteil bauteil) {
+		TransportRequestData tr = Util.packTransportRequest(kunde, bauteil);
+		
+		RESTConnector connector = new RESTConnector();
+		return connector.submitTransportRequest(tr);
 	}
 
 }

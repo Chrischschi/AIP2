@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Kunde implements EKunde,Serializable{
@@ -19,6 +20,7 @@ public class Kunde implements EKunde,Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 
 	private String name;
+	@OneToOne
 	private Adresse adresse;
 	
 

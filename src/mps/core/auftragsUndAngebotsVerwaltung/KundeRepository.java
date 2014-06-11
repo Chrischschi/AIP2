@@ -21,10 +21,10 @@ public class KundeRepository {
 		return a;
 	}
 
-	public static Kunde getByID(Long kundenNr) {
+	public static Kunde getByID(long i) {
 		Session session = HibernateUtil.beginTransaction();
 		
-		Kunde result = (Kunde) session.get(Kunde.class, kundenNr);
+		Kunde result = (Kunde) session.get(Kunde.class, i);
 		
 		HibernateUtil.commitTransaction();
 		
