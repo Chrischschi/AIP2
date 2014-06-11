@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 public class Kunde implements EKunde,Serializable{
@@ -15,9 +16,11 @@ public class Kunde implements EKunde,Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/** Attribute */
+	@XmlTransient
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 
+	
 	private String name;
 	private String adresse;
 	

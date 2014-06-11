@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlTransient;
 
 //import java.util.HashSet;
 
@@ -19,10 +20,13 @@ public class Bauteil {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr;
 	private String name;
+	@XmlTransient
 	@OneToOne
 	private Arbeitsplan arbeitsplan;
+	@XmlTransient
 	@OneToOne
 	private Stueckliste stueckliste;
+	@XmlTransient
 	@OneToMany
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
 	

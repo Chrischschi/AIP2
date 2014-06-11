@@ -30,13 +30,15 @@ public class RESTConnector {
 	public RESTConnector(String uri) {
 		this.uri = uri;
 		this.client = ClientBuilder.newClient();
+		this.client.register(new org.glassfish.jersey.moxy.json.MoxyJsonFeature());
+		
 		this.target = this.client.target(this.uri);
 	}
 	
 	
 	public long submitTransportRequest(TransportRequestData tr) {
 		//convert data to json (our message body)
-		Entity<TransportRequestData> payload = Entity.json(tr);
+		Entity<TransportRequestData> payload = Entity.xml(tr);
 		
 		//send message via POST method
 		Response response = target.path(SCENARIO_PATH).request().post(payload);

@@ -3,15 +3,18 @@ package extern.uppsTransportService.model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/* Provided by UPPS */
+import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
+import mps.core.fertigung.Bauteil;
+
+
 @XmlRootElement
 public class TransportRequestData {
 	
+	public TransportRequestData() {};
+	
 	@XmlElement
-	public Name name; 
+	public Kunde deliveryReciever;
 	@XmlElement
-	public Address address; 
-	@XmlElement
-	public DeliveryItem deliveryItem;
+	public Bauteil deliveryItem;
 
 }
