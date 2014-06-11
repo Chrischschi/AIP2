@@ -6,5 +6,5 @@ public interface IKunden {
 		return KundeService.getInstance();
 	}
 
-	EKunde kundeErstellen(String name, String adresse);
+	EKunde kundeErstellen(String name, Adresse adresse);
 }

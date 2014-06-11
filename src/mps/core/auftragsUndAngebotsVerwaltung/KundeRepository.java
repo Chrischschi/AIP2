@@ -5,7 +5,7 @@ import mps.core.auftragsUndAngebotsVerwaltung.HibernateUtil;
 
 public class KundeRepository {
 
-	public static Kunde createPersistent(String name, String adresse) {
+	public static Kunde createPersistent(String name, Adresse adresse) {
 		//Create Transient object
 		Kunde a = Kunde.create(name,adresse);
 		

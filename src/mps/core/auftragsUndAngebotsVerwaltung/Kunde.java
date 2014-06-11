@@ -19,7 +19,7 @@ public class Kunde implements EKunde,Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 
 	private String name;
-	private String adresse;
+	private Adresse adresse;
 	
 
 	public Long getNr() {
@@ -50,14 +50,14 @@ public class Kunde implements EKunde,Serializable{
 	/**
 	 * @return the address
 	 */
-	public String getAdresse() {
+	public Adresse getAdresse() {
 		return adresse;
 	}
 
 	/**
 	 * @param address of client
 	 */
-	public void setAdresse(String adresse) {
+	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
 
@@ -73,7 +73,7 @@ public class Kunde implements EKunde,Serializable{
 			   this.getAdresse().equals(that.getAdresse());
 	}
 
-	public static Kunde create(String name, String adresse) {
+	public static Kunde create(String name, Adresse adresse) {
 		Kunde kunde = new Kunde();
 		kunde.setName(name);
 		kunde.setAdresse(adresse);

@@ -12,7 +12,7 @@ public final class KundeService implements IKunden{
 	}
 	
 	//SystemOperation
-	public Kunde kundeErstellen(String name,String adresse) {
+	public Kunde kundeErstellen(String name,Adresse adresse) {
 		return KundeRepository.createPersistent(name, adresse);
 	}
 	

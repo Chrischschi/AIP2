@@ -1,5 +1,6 @@
 package mps.redundant.server;
 
+import mps.core.auftragsUndAngebotsVerwaltung.Adresse;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IKunden;
@@ -20,7 +21,7 @@ public class Mps {
 	 * 
 	 *         Erzeugt einen Kunden welcher in der Datenbank hinterlegt wird.
 	 */
-	public EKunde createKunde(String name, String adresse) {
+	public EKunde createKunde(String name, Adresse adresse) {
 		return IKunden.getKundeService().kundeErstellen(name,adresse);
 	}
 	

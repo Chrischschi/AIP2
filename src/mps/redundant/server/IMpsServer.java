@@ -3,6 +3,7 @@ package mps.redundant.server;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
+import mps.core.auftragsUndAngebotsVerwaltung.Adresse;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 
@@ -18,7 +19,7 @@ public interface IMpsServer extends Remote {
 
 	EAngebot createAngebot(EKunde kunde, String string, String string2, int i, Long long1)
 			throws RemoteException;
-	EKunde createKunde(String name,String adresse)
+	EKunde createKunde(String name,Adresse adresse)
 			throws RemoteException;
 	void zahlungsEingang(int zahlung, Long rechnungsnummer)throws RemoteException;
 }

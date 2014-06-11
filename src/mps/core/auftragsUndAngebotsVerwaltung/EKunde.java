@@ -5,10 +5,10 @@ public interface EKunde {
 	
 	String getName();
 	
-	String getAdresse();
+	Adresse getAdresse();
 	
 	void setName(String name);
 	
-	void setAdresse(String adresse);
+	void setAdresse(Adresse adresse);
 	
 }
