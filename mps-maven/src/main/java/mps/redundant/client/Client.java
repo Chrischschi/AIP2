@@ -40,6 +40,7 @@ public class Client {
 		    		  System.out.println("kunde <name> <adresse>");
 		    		  System.out.println("angebot <kundenNr> <erstellungsdatum> <ablaufsdatum> <preis> <bauteilNr>");
 		    		  System.out.println("auftrag <abgeschlossen?> <erstellungsdatum> <angebotNr>");
+		    		  System.out.println("lieferung <auftragNr>");
 		    		  System.out.println("Enter your command: ");
 		         String input = br.readLine();
 		         if(input.trim().matches("kunde \\w* \\w*")){
@@ -56,6 +57,11 @@ public class Client {
 		        	EAngebot angebot= remoteDispatcher.getRemoteServerInstance().getAngebot(Long.parseLong(inputPieces[3]));
 		        	remoteDispatcher.getRemoteServerInstance().createAuftrag(Boolean.getBoolean(inputPieces[1]), inputPieces[2], angebot);
 		         }
+		         else if(input.trim().matches("lieferung \\d*")){
+		        	 String[] inputPieces = input.split(" ");
+		        	 long transportID =  remoteDispatcher.getRemoteServerInstance().starteAuslieferung(Long.parseLong(inputPieces[1]));
+		        	 System.out.println("Auftrag " + inputPieces[1] + " mit transportID " + transportID + " versendet.");
+		         }
 		         else{
 		        	 System.out.println("Wrong command syntax!");
 		         }
@@ -71,4 +77,3 @@ public class Client {
 
 	}
 }
-
