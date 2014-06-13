@@ -1,14 +1,17 @@
-package transportDienstAdapterREST;
+package transportDienstAdapterRESTv2;
 
 
 
+import javax.json.Json;
+import javax.json.JsonObject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
-import extern.uppsTransportService.model.TransportRequestData;
+import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
+import mps.core.fertigung.Bauteil;
 
 public class RESTConnector {
 	
@@ -36,9 +39,11 @@ public class RESTConnector {
 	}
 	
 	
-	public long submitTransportRequest(TransportRequestData tr) {
+	public long submitTransportRequest(Kunde k,  Bauteil b) {
 		//convert data to json (our message body)
-		Entity<TransportRequestData> payload = Entity.json(tr);
+		JsonObject sendData = toJson(k,b);
+		
+		Entity<JsonObject> payload = Entity.json(sendData);
 		
 		//send message via POST method
 		Response response = target.path(SCENARIO_PATH).request().post(payload);
@@ -49,6 +54,22 @@ public class RESTConnector {
 		long transportRequestId = response.readEntity(Long.class);
 		
 		return transportRequestId;
+	}
+
+	private JsonObject toJson(Kunde k, Bauteil b) {
+		JsonObject deliveryItemObj = Json.createObjectBuilder()
+				.add("id", b.getNr())
+				.add("itemName", b.getName())
+				.build();
+		
+		JsonObject rootObject = Json.createObjectBuilder()
+				.add("name", k.getName())
+				.add("adress", k.getAdresse())
+				.add("deliveryItem", deliveryItemObj)
+				.build();
+		
+		return rootObject;
+		
 	}
 
 }
