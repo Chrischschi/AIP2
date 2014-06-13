@@ -20,3 +20,10 @@ MPSFertigungsplan.txt
 hs_err_pid*
 /bin
 /nbproject/private/
+
+#maven related 
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
