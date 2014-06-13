@@ -7,4 +7,6 @@ public interface IKunden {
 	}
 
 	EKunde kundeErstellen(String name, String adresse);
+
+	EKunde getKunde(Long nr);
 }

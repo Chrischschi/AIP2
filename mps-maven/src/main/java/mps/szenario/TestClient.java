@@ -1,16 +1,9 @@
 package mps.szenario;
 
-import mps.core.auftragsUndAngebotsVerwaltung.Auftrag;
-import mps.core.auftragsUndAngebotsVerwaltung.AuftragRepository;
-import mps.core.auftragsUndAngebotsVerwaltung.AuftragService;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
-import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
-import mps.core.auftragsUndAngebotsVerwaltung.KundeRepository;
-import mps.core.auftragsUndAngebotsVerwaltung.KundeService;
-import mps.core.fertigung.Bauteil;
-import mps.core.fertigung.dao.BauteilManager;
+import mps.core.auftragsUndAngebotsVerwaltung.dao.AuftragManager;
 import mps.redundant.Config;
 import mps.redundant.dispatcher.IDispatcher;
 
@@ -57,9 +50,11 @@ public class TestClient {
 			System.out.println("Press any key to send a transport request to UPPS...");
 			System.in.read();
 			
-			EAuftrag auftrag = AuftragRepository.getByID(1L);
+			EAuftrag auftrag = AuftragManager.loadAuftrag(1L);
 			
-			remoteDispatcher.getRemoteServerInstance().liefereAuftragAus(auftrag);
+			long transportID = remoteDispatcher.getRemoteServerInstance().liefereAuftragAus(auftrag);
+			
+			System.out.println("Auftrag " +auftrag.getNr() + " mit transportID " + transportID + " versendet.");
 		
 		} else
 			System.err

@@ -1,5 +1,7 @@
 package mps.core.auftragsUndAngebotsVerwaltung;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Auftrag implements EAuftrag {
+public class Auftrag implements Serializable, EAuftrag {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7479698477845443890L;
 	/** Attribute */
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

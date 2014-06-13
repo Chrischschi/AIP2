@@ -15,9 +15,7 @@ public interface IAuftraege {
 	 * diese referenz hat den typ E(xtern)Auftrag, damit
 	 * nicht implementierungsdetails aus der komponente raussickern 
 	 */
-	static EAuftrag getAuftrag(Long auftragNr) {
-		return AuftragRepository.readAuftrag(auftragNr);
-	}
+	EAuftrag getAuftrag(Long auftragNr);
 	
 	static IAuftraege getAuftragService() {
 		return AuftragService.getInstance();

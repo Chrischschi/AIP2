@@ -16,6 +16,7 @@ public class Kunde implements EKunde,Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	/** Attribute */
+	@XmlTransient
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long nr; 

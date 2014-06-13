@@ -26,7 +26,7 @@ public class AngebotServiceTest {
 	@Test
 	public void testAngebotErstellen() {
 		AngebotService as = AngebotService.getInstance();
-		Angebot a1 = as.angebotErstellen(1L, "Gestern", "Morgen", 1147, 1L);
+		Angebot a1 = as.angebotErstellen(null, "Gestern", "Morgen", 1147, 1L);
 		long a1Nr = a1.getNr();
 		
 		Session s = HibernateUtil.getSessionFactory().getCurrentSession();

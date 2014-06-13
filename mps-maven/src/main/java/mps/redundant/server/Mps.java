@@ -1,15 +1,12 @@
 package mps.redundant.server;
 
-import transportDienstAdapterREST.RESTConnector;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IKunden;
 import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
-import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
 import mps.core.buchhaltung.IRechnungen;
-import mps.core.fertigung.Bauteil;
 
 /**
  * MPS ist sozusagen die Fassade, welche die bisherige "Buisness Logik"
@@ -29,6 +26,15 @@ public class Mps {
 	}
 	
 	/**
+	 * @param nr
+	 * @return
+	 *  Gibt Kunden mit der Kundennummer zurueck
+	 */
+	public EKunde getKunde(Long nr){
+		return IKunden.getKundeService().getKunde(nr);
+	}
+	
+	/**
 	 * @param gueltigAb
 	 * @param gueltigBis
 	 * @param preis
@@ -43,6 +49,10 @@ public class Mps {
 				gueltigBis, preis, bauteilId);
 	}
 
+	public EAngebot getAngebot(long nr){
+		return IAngebote.getAngebotService().getAngebot(nr);
+	}
+	
 	/**
 	 * @param istAbgeschlossen
 	 * @param beauftragtAm
@@ -64,7 +74,7 @@ public class Mps {
 	
 	
 	public long liefereAuftragAus(EAuftrag auftrag) {
-		return 0;
+		return 0; // TODO Aufrufe richtung mps.core.versand.VersandService 
 		
 	}
 

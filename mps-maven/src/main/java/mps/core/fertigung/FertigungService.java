@@ -23,10 +23,10 @@ public class FertigungService implements IFertigung {
 	
 	public Long fertigungsPlanErstellen(Long auftragNr,Long bauteilNr){
 		Fertigungsauftrag f = new Fertigungsauftrag();
-		Bauteil b = BauteilManager.loadBauteil(bauteilNr);
+		Bauteil b = BauteilManager.loadBauteilforFertigungsplan(bauteilNr);
 		f.setAuftrag(auftragNr);
 		f.setBauteil(b);
-		long fid = FertigungsauftragManager.saveFertigungsauftrag(f);
+		long fid = FertigungsauftragManager.saveFertigungsauftragforFertigungsplan(f);
 		
 		fertigungsplanDrucken(fid, f);
 		
@@ -35,7 +35,7 @@ public class FertigungService implements IFertigung {
 	private void fertigungsplanDrucken(Long fid, Fertigungsauftrag f){
 		Path filePath = Paths.get("MPSFertigungsplan"+fid+".txt"); //TODO eventuell ein unterverzeichnis "outputFiles" einfuehren
 		File file = filePath.toAbsolutePath().toFile();
-		String output = FertigungsauftragManager.loadFertigungsauftrag(fid).toString();
+		String output = FertigungsauftragManager.loadFertigungsauftragforFertigungsplan(fid).toString();
 			//Using Java 7 feature try-with-resources to close writer after the IO operation
 	        try(Writer out = new BufferedWriter(new OutputStreamWriter(
         			new FileOutputStream(file), Charset.forName("UTF-8")))){

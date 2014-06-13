@@ -6,8 +6,6 @@ import java.rmi.RemoteException;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
-import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
-import mps.core.fertigung.Bauteil;
 
 public interface IMpsServer extends Remote {
 	boolean isDeaktiviert() throws RemoteException;
@@ -21,9 +19,14 @@ public interface IMpsServer extends Remote {
 
 	EAngebot createAngebot(EKunde kunde, String string, String string2, int i, Long long1)
 			throws RemoteException;
+	EAngebot getAngebot(long nr)throws RemoteException;
+	
 	EKunde createKunde(String name,String adresse)
+			throws RemoteException;
+	EKunde getKunde(Long nr)
 			throws RemoteException;
 	void zahlungsEingang(int zahlung, Long rechnungsnummer)throws RemoteException;
 	
 	long liefereAuftragAus(EAuftrag auftrag) throws RemoteException;
 }
+
