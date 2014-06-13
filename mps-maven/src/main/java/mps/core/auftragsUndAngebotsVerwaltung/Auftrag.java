@@ -25,7 +25,7 @@ public class Auftrag implements Serializable, EAuftrag {
 	
 	/** Referenzen */
 	@OneToOne(fetch=FetchType.EAGER)
-	private Angebot angebot = null;
+	private Angebot angebot;
 	private Long fertigungsauftragNr;
 	private Long rechnungNr; 
 

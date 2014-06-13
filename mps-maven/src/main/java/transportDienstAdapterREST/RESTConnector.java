@@ -10,8 +10,10 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
+import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
 import mps.core.fertigung.Bauteil;
+import mps.core.fertigung.EBauteil;
 
 public class RESTConnector {
 	
@@ -39,7 +41,7 @@ public class RESTConnector {
 	}
 	
 	
-	public long submitTransportRequest(Kunde k,  Bauteil b) {
+	public long submitTransportRequest(EKunde k,  EBauteil b) {
 		//convert data to json (our message body)
 		JsonObject sendData = toJson(k,b);
 		
@@ -56,7 +58,7 @@ public class RESTConnector {
 		return transportRequestId;
 	}
 
-	private JsonObject toJson(Kunde k, Bauteil b) {
+	private JsonObject toJson(EKunde k, EBauteil b) {
 		JsonObject deliveryItemObj = Json.createObjectBuilder()
 				.add("id", b.getNr())
 				.add("itemName", b.getName())
@@ -71,5 +73,6 @@ public class RESTConnector {
 		return rootObject;
 		
 	}
+
 
 }

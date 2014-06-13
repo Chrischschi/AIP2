@@ -50,11 +50,11 @@ public class TestClient {
 			System.out.println("Press any key to send a transport request to UPPS...");
 			System.in.read();
 			
-			EAuftrag auftrag = AuftragManager.loadAuftrag(1L);
+			long auftragNr = 3;
 			
-			long transportID = remoteDispatcher.getRemoteServerInstance().liefereAuftragAus(auftrag);
+			long transportID = remoteDispatcher.getRemoteServerInstance().starteAuslieferung(auftragNr);
 			
-			System.out.println("Auftrag " +auftrag.getNr() + " mit transportID " + transportID + " versendet.");
+			System.out.println("Auftrag " +auftragNr + " mit transportID " + transportID + " versendet.");
 		
 		} else
 			System.err

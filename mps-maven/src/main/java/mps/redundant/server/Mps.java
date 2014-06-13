@@ -73,8 +73,10 @@ public class Mps {
 	}
 	
 	
-	public long liefereAuftragAus(EAuftrag auftrag) {
-		return 0; // TODO Aufrufe richtung mps.core.versand.VersandService 
+	public long starteAuslieferung(Long auftragNr) {
+		
+		return mps.core.versand.VersandService
+				.getInstance().starteAuslieferung(auftragNr);
 		
 	}
 

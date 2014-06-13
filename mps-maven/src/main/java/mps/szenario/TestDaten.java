@@ -105,7 +105,5 @@ public class TestDaten {
 		BauteilManager.updateBauteil(b2);
 		
 		
-
-
 	}
 }

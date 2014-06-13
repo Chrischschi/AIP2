@@ -13,4 +13,6 @@ public interface EAuftrag {
 	
 	void setBeauftragtAm(String beauftragtAm);
 	
+	EAngebot getAngebot();
+	
 }

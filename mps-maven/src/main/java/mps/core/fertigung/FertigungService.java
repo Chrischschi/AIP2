@@ -47,4 +47,8 @@ public class FertigungService implements IFertigung {
 	            e.printStackTrace();
 	        }
 	}
+	
+	public EBauteil getBauteil(Long bauteilNr){
+		return BauteilManager.loadBauteil(bauteilNr);
+	}
 }

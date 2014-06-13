@@ -11,10 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlTransient;
 
-//import java.util.HashSet;
 
 @Entity
-public class Bauteil {
+public class Bauteil implements EBauteil {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -23,10 +22,8 @@ public class Bauteil {
 	@XmlTransient
 	@OneToOne
 	private Arbeitsplan arbeitsplan;
-	@XmlTransient
 	@OneToOne
 	private Stueckliste stueckliste;
-	@XmlTransient
 	@OneToMany
 	private Set<Fertigungsauftrag> fertigungsauftragListe = new HashSet<Fertigungsauftrag>();
 	

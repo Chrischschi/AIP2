@@ -27,6 +27,6 @@ public interface IMpsServer extends Remote {
 			throws RemoteException;
 	void zahlungsEingang(int zahlung, Long rechnungsnummer)throws RemoteException;
 	
-	long liefereAuftragAus(EAuftrag auftrag) throws RemoteException;
+	long starteAuslieferung(Long auftragNr) throws RemoteException;
 }
 

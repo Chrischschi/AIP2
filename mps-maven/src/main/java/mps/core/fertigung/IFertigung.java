@@ -23,6 +23,13 @@ public interface IFertigung {
 	 */
 	Long fertigungsPlanErstellen(Long auftragNr, Long bauteilNr);
 	
+	/**
+	 * Holt eine read-only sicht auf ein bauteil 
+	 * von einer ID ausgehend 
+	 * @param bauteilNr
+	 * @return das read-only bauteil
+	 */
+	EBauteil getBauteil(Long bauteilNr);
 	
 	static IFertigung getFertigungService() {
 		return FertigungService.getInstance();
