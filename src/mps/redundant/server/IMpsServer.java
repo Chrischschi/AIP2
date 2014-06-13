@@ -18,7 +18,12 @@ public interface IMpsServer extends Remote {
 
 	EAngebot createAngebot(EKunde kunde, String string, String string2, int i, Long long1)
 			throws RemoteException;
+	EAngebot getAngebot(long nr)throws RemoteException;
+	
 	EKunde createKunde(String name,String adresse)
 			throws RemoteException;
+	EKunde getKunde(Long nr)
+			throws RemoteException;
 	void zahlungsEingang(int zahlung, Long rechnungsnummer)throws RemoteException;
+
 }

@@ -11,6 +11,8 @@ public interface EAngebot {
 	
 	Long getBauteilNr();
 	
+	EKunde getKunde();
+	
 	void setGueltigAb(String ab);
 	
 	void setGueltigBis(String bis);

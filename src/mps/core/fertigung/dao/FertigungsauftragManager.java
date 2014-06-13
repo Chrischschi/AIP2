@@ -11,9 +11,7 @@ public class FertigungsauftragManager {
 	
 	public static long saveFertigungsauftrag(Fertigungsauftrag v){
         try {
-            HibernateUtil.beginTransaction();
             long id = fertigungsauftragDAO.save(v);
-            HibernateUtil.commitTransaction();
             return id;
         } catch (HibernateException ex) {
             System.out.println("Fertigungsauftrag konnte nicht gespeichert werden");
@@ -25,9 +23,7 @@ public class FertigungsauftragManager {
 	
 	public static Fertigungsauftrag loadFertigungsauftrag(Long id){
         try {
-        	HibernateUtil.beginTransaction();
             Fertigungsauftrag res = fertigungsauftragDAO.findByID(Fertigungsauftrag.class, id);
-            HibernateUtil.commitTransaction();
             return res;
         } catch (HibernateException ex) {
             System.out.println("Fertigungsauftrag konnte nicht geladen werden");

@@ -1,5 +1,7 @@
 package mps.core.buchhaltung;
 
+import mps.core.buchhaltung.dao.RechnungManager;
+
 
 
 //TODO The whole class
@@ -15,13 +17,13 @@ public final class RechnungService implements IRechnungen {
 	
 	@Override
 	public Long rechnungErstellen(int betrag,Long auftragNr) {
-		Long rechnungNr = RechnungRepository.createPersistent(betrag,auftragNr);
+		Long rechnungNr = RechnungManager.saveRechnung(betrag,auftragNr);
 		
 		return rechnungNr;
 	}
 	
 	public void zahlungsEingang(int zahlung, Long rechnungsnummer){
-		RechnungRepository.zahlungsEingang(zahlung, rechnungsnummer);
+		RechnungManager.zahlungsEingang(zahlung, rechnungsnummer);
 	}
 	 
 	 

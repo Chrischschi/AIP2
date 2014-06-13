@@ -25,6 +25,15 @@ public class Mps {
 	}
 	
 	/**
+	 * @param nr
+	 * @return
+	 *  Gibt Kunden mit der Kundennummer zurueck
+	 */
+	public EKunde getKunde(Long nr){
+		return IKunden.getKundeService().getKunde(nr);
+	}
+	
+	/**
 	 * @param gueltigAb
 	 * @param gueltigBis
 	 * @param preis
@@ -39,6 +48,10 @@ public class Mps {
 				gueltigBis, preis, bauteilId);
 	}
 
+	public EAngebot getAngebot(long nr){
+		return IAngebote.getAngebotService().getAngebot(nr);
+	}
+	
 	/**
 	 * @param istAbgeschlossen
 	 * @param beauftragtAm
