@@ -43,22 +43,22 @@ public class Client {
 		    		  System.out.println("lieferung <auftragNr>");
 		    		  System.out.println("Enter your command: ");
 		         String input = br.readLine();
-		         if(input.trim().matches("kunde \\w* \\w*")){
-		        	String[] inputPieces = input.split(" ");
+		         if(input.trim().matches("kunde#\\w*#\\w*")){
+		        	String[] inputPieces = input.split("#");
 		        	remoteDispatcher.getRemoteServerInstance().createKunde(inputPieces[1],inputPieces[2]);
 		         }
-		         else if(input.trim().matches("angebot \\d* .* .* \\d* \\d*")){
-		        	String[] inputPieces = input.split(" ");
+		         else if(input.trim().matches("angebot#\\d*#.*#.*#\\d*#\\d*")){
+		        	String[] inputPieces = input.split("#");
 		        	EKunde kunde = remoteDispatcher.getRemoteServerInstance().getKunde(Long.parseLong(inputPieces[1]));
 		        	remoteDispatcher.getRemoteServerInstance().createAngebot(kunde, inputPieces[2], inputPieces[3], Integer.parseInt(inputPieces[4]), Long.parseLong(inputPieces[5]));
 		         }
-		         else if(input.trim().matches("auftrag .* .* \\d*")){
-		        	String[] inputPieces = input.split(" ");
+		         else if(input.trim().matches("auftrag#.*#.*#\\d*")){
+		        	String[] inputPieces = input.split("#");
 		        	EAngebot angebot= remoteDispatcher.getRemoteServerInstance().getAngebot(Long.parseLong(inputPieces[3]));
 		        	remoteDispatcher.getRemoteServerInstance().createAuftrag(Boolean.getBoolean(inputPieces[1]), inputPieces[2], angebot);
 		         }
-		         else if(input.trim().matches("lieferung \\d*")){
-		        	 String[] inputPieces = input.split(" ");
+		         else if(input.trim().matches("lieferung#\\d*")){
+		        	 String[] inputPieces = input.split("#");
 		        	 long transportID =  remoteDispatcher.getRemoteServerInstance().starteAuslieferung(Long.parseLong(inputPieces[1]));
 		        	 System.out.println("Auftrag " + inputPieces[1] + " mit transportID " + transportID + " versendet.");
 		         }
