@@ -11,8 +11,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
-import mps.core.auftragsUndAngebotsVerwaltung.Kunde;
-import mps.core.fertigung.Bauteil;
 import mps.core.fertigung.EBauteil;
 
 public class RESTConnector {

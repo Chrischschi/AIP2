@@ -4,7 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
-import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 
 public interface IMpsServer extends Remote {

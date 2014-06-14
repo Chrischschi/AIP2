@@ -1,9 +1,7 @@
 package mps.szenario;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
-import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
-import mps.core.auftragsUndAngebotsVerwaltung.dao.AuftragManager;
 import mps.redundant.Config;
 import mps.redundant.dispatcher.IDispatcher;
 

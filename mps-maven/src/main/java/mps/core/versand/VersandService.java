@@ -1,8 +1,6 @@
 package mps.core.versand;
 
 import transportDienstAdapterREST.RESTConnector;
-import mps.core.auftragsUndAngebotsVerwaltung.Angebot;
-import mps.core.auftragsUndAngebotsVerwaltung.AuftragService;
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
 import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
@@ -13,7 +11,7 @@ import mps.core.versand.dao.LieferungManager;
 import mps.core.versand.dao.TransportauftragManager;
 
 
-public class VersandService {
+public class VersandService implements ILieferungen {
 	
 	private static final VersandService INSTANCE = new VersandService(); 
 	
@@ -42,7 +40,7 @@ public class VersandService {
 		
 	}
 
-	private Transportauftrag erstelleTransportAuftrag(Lieferung lieferung) {
+	public Transportauftrag erstelleTransportAuftrag(Lieferung lieferung) {
 		
 		IAuftraege auftragService = IAuftraege.getAuftragService();
 		

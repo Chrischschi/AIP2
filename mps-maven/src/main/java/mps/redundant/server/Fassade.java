@@ -1,18 +1,18 @@
 package mps.redundant.server;
 
 import mps.core.auftragsUndAngebotsVerwaltung.EAngebot;
-import mps.core.auftragsUndAngebotsVerwaltung.EAuftrag;
 import mps.core.auftragsUndAngebotsVerwaltung.EKunde;
 import mps.core.auftragsUndAngebotsVerwaltung.IKunden;
 import mps.core.auftragsUndAngebotsVerwaltung.IAngebote;
 import mps.core.auftragsUndAngebotsVerwaltung.IAuftraege;
 import mps.core.buchhaltung.IRechnungen;
+import mps.core.versand.ILieferungen;
 
 /**
  * MPS ist sozusagen die Fassade, welche die bisherige "Buisness Logik"
  * anbietet.
  */
-public class Mps {
+public class Fassade {
 
 	/**
 	 * @param name
@@ -75,8 +75,7 @@ public class Mps {
 	
 	public long starteAuslieferung(Long auftragNr) {
 		
-		return mps.core.versand.VersandService
-				.getInstance().starteAuslieferung(auftragNr);
+		return ILieferungen.getVersandService().starteAuslieferung(auftragNr);
 		
 	}
 

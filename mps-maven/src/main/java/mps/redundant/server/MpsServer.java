@@ -13,7 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  * MpsServer Prozess, welcher die eingehenden Anfragen ausfuehrt.
  */
-public class MpsServer extends Mps implements IMpsServer {
+public class MpsServer extends Fassade implements IMpsServer {
 	private String serverName;
 	@SuppressWarnings("unused")
 	private Heartbeat heartBeat;
