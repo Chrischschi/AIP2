@@ -43,7 +43,7 @@ public class Client {
 		    		  System.out.println("lieferung <auftragNr>");
 		    		  System.out.println("Enter your command: ");
 		         String input = br.readLine();
-		         if(input.trim().matches("kunde#\\w*#\\w*")){
+		         if(input.trim().matches("kunde#.*#.*")){
 		        	String[] inputPieces = input.split("#");
 		        	remoteDispatcher.getRemoteServerInstance().createKunde(inputPieces[1],inputPieces[2]);
 		         }
